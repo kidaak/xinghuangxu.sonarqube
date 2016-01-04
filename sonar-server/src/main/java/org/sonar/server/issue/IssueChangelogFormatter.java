@@ -22,8 +22,13 @@ package org.sonar.server.issue;
 import org.sonar.api.ServerComponent;
 import org.sonar.api.i18n.I18n;
 import org.sonar.api.issue.internal.FieldDiffs;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.Durations;
+=======
+import org.sonar.api.utils.internal.WorkDurationFactory;
+import org.sonar.core.i18n.DefaultI18n;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.core.issue.IssueUpdater;
 import org.sonar.server.user.UserSession;
 

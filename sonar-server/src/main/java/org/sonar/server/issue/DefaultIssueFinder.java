@@ -34,6 +34,10 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.user.User;
 import org.sonar.api.user.UserFinder;
 import org.sonar.api.utils.Paging;
+<<<<<<< HEAD
+=======
+import org.sonar.api.utils.internal.WorkDurationFactory;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.core.component.ComponentDto;
 import org.sonar.core.issue.DefaultIssueQueryResult;
 import org.sonar.core.issue.db.IssueChangeDao;
@@ -145,8 +149,13 @@ public class DefaultIssueFinder implements IssueFinder {
       }
 
       Collection<Component> components = findComponents(componentIds);
+<<<<<<< HEAD
       Collection<Component> groupComponents = findSubProjects(components);
       Collection<Component> rootComponents = findProjects(components);
+=======
+      Collection<Component> groupComponents = findGroupComponents(components);
+      Collection<Component> rootComponents = findRootComponents(components);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
       Set<Component> allComponents = newHashSet(components);
       allComponents.addAll(groupComponents);
@@ -204,20 +213,36 @@ public class DefaultIssueFinder implements IssueFinder {
     return Lists.<Component>newArrayList(resourceDao.selectComponentsByIds(componentIds));
   }
 
+<<<<<<< HEAD
   private Collection<Component> findSubProjects(Collection<Component> components) {
     return findComponents(newHashSet(Iterables.transform(components, new Function<Component, Long>() {
       @Override
       public Long apply(@Nullable Component input) {
         return input != null ? ((ComponentDto) input).subProjectId() : null;
+=======
+  private Collection<Component> findGroupComponents(Collection<Component> components) {
+    return findComponents(newHashSet(Iterables.transform(components, new Function<Component, Long>() {
+      @Override
+      public Long apply(Component input) {
+        return ((ComponentDto) input).subProjectId();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       }
     })));
   }
 
+<<<<<<< HEAD
   private Collection<Component> findProjects(Collection<Component> components) {
     return findComponents(newHashSet(Iterables.transform(components, new Function<Component, Long>() {
       @Override
       public Long apply(@Nullable Component input) {
         return input != null ? ((ComponentDto) input).projectId() : null;
+=======
+  private Collection<Component> findRootComponents(Collection<Component> components) {
+    return findComponents(newHashSet(Iterables.transform(components, new Function<Component, Long>() {
+      @Override
+      public Long apply(Component input) {
+        return ((ComponentDto) input).projectId();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       }
     })));
   }

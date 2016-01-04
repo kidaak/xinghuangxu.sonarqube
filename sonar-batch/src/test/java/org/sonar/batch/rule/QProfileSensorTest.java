@@ -28,7 +28,10 @@ import org.sonar.api.test.IsMeasure;
 import org.sonar.core.UtcDateUtils;
 
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.argThat;
@@ -49,7 +52,12 @@ public class QProfileSensorTest {
 
   @Test
   public void to_string() throws Exception {
+<<<<<<< HEAD
     QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs);
+=======
+    QualityProfileDao dao = mock(QualityProfileDao.class);
+    QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs, dao);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(sensor.toString()).isEqualTo("QProfileSensor");
   }
 
@@ -57,7 +65,11 @@ public class QProfileSensorTest {
   public void no_qprofiles() throws Exception {
     when(moduleQProfiles.findAll()).thenReturn(Collections.<QProfile>emptyList());
 
+<<<<<<< HEAD
     QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs);
+=======
+    QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs, dao);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
     sensor.analyse(project, sensorContext);
 
@@ -72,7 +84,11 @@ public class QProfileSensorTest {
     when(moduleQProfiles.findByLanguage("abap")).thenReturn(null);
     fs.addLanguages("java", "php", "abap");
 
+<<<<<<< HEAD
     QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs);
+=======
+    QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs, dao);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
     sensor.analyse(project, sensorContext);
   }
@@ -98,9 +114,15 @@ public class QProfileSensorTest {
     when(moduleQProfiles.findByLanguage("java")).thenReturn(JAVA_PROFILE);
     when(moduleQProfiles.findByLanguage("php")).thenReturn(PHP_PROFILE);
     when(moduleQProfiles.findByLanguage("abap")).thenReturn(null);
+<<<<<<< HEAD
     fs.addLanguages("java", "php");
 
     QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs);
+=======
+    fs.addLanguages("java");
+
+    QProfileSensor sensor = new QProfileSensor(moduleQProfiles, fs, dao);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
     sensor.analyse(project, sensorContext);
 

@@ -74,9 +74,29 @@ public final class MeasurePersister implements ScanPersister {
 
       session.commit();
     } catch (Exception e) {
+<<<<<<< HEAD
       throw new IllegalStateException("Unable to save some measures", e);
     } finally {
       MyBatis.closeQuietly(session);
+=======
+      // SONAR-4066
+      throw new SonarException(String.format("Unable to save measure for metric [%s] on component [%s]", measure.getMetricKey(), resource.getKey()), e);
+    }
+    if (model != null) {
+      memoryOptimizer.evictDataMeasure(measure, model);
+    }
+  }
+
+  private MeasureModel insertOrUpdate(Resource resource, Measure measure) {
+    Snapshot snapshot = resourcePersister.getSnapshotOrFail(resource);
+    if (measure.getId() != null) {
+      return update(measure, snapshot);
+    }
+    if (shouldPersistMeasure(resource, measure)) {
+      MeasureModel insert = insert(measure, snapshot);
+      measure.setId(insert.getId());
+      return insert;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     }
   }
 
@@ -133,4 +153,99 @@ public final class MeasurePersister implements ScanPersister {
     }
     return model;
   }
+<<<<<<< HEAD
+=======
+
+  private void insert(Iterable<MeasureModelAndDetails> values) {
+    SqlSession session = mybatis.openSession();
+    try {
+      MeasureMapper mapper = session.getMapper(MeasureMapper.class);
+
+      for (MeasureModelAndDetails value : values) {
+        try {
+          mapper.insert(value.getMeasureModel());
+          if (value.getMeasureModel().getMeasureData() != null) {
+            mapper.insertData(value.getMeasureModel().getMeasureData());
+          }
+        } catch (Exception e) {
+          // SONAR-4066
+          throw new SonarException(String.format("Unable to save measure for metric [%s] on component [%s]", value.getMetricKey(), value.getResourceKey()), e);
+        }
+      }
+
+      session.commit();
+    } finally {
+      MyBatis.closeQuietly(session);
+    }
+  }
+
+  private MeasureModel insert(Measure measure, Snapshot snapshot) {
+    MeasureModel value = model(measure);
+    value.setSnapshotId(snapshot.getId());
+
+    SqlSession session = mybatis.openSession();
+    try {
+      MeasureMapper mapper = session.getMapper(MeasureMapper.class);
+
+      mapper.insert(value);
+      if (value.getMeasureData() != null) {
+        mapper.insertData(value.getMeasureData());
+      }
+
+      session.commit();
+    } finally {
+      MyBatis.closeQuietly(session);
+    }
+
+    return value;
+  }
+
+  private MeasureModel update(Measure measure, Snapshot snapshot) {
+    MeasureModel value = model(measure);
+    value.setId(measure.getId());
+    value.setSnapshotId(snapshot.getId());
+
+    SqlSession session = mybatis.openSession();
+    try {
+      MeasureMapper mapper = session.getMapper(MeasureMapper.class);
+
+      mapper.update(value);
+      mapper.deleteData(value);
+      if (value.getMeasureData() != null) {
+        mapper.insertData(value.getMeasureData());
+      }
+
+      session.commit();
+    } finally {
+      MyBatis.closeQuietly(session);
+    }
+
+    return value;
+  }
+
+  // SONAR-4066
+  private static class MeasureModelAndDetails {
+    private final MeasureModel measureModel;
+    private final String resourceKey;
+    private final String metricKey;
+
+    public MeasureModelAndDetails(MeasureModel measureModel, String resourceKey, String metricKey) {
+      this.measureModel = measureModel;
+      this.resourceKey = resourceKey;
+      this.metricKey = metricKey;
+    }
+
+    public MeasureModel getMeasureModel() {
+      return measureModel;
+    }
+
+    public String getResourceKey() {
+      return resourceKey;
+    }
+
+    public String getMetricKey() {
+      return metricKey;
+    }
+  }
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 }

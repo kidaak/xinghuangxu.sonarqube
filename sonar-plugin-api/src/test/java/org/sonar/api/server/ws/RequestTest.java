@@ -102,9 +102,13 @@ public class RequestTest {
   }
 
   @Test
-  public void required_param_is_missing() throws Exception {
+  public void mandatory_param_is_missing() throws Exception {
     try {
+<<<<<<< HEAD
       request.mandatoryParam("required_param");
+=======
+      request.mandatoryParam("foo");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       fail();
     } catch (IllegalArgumentException e) {
       assertThat(e).hasMessage("Parameter 'required_param' is missing");
@@ -112,6 +116,7 @@ public class RequestTest {
   }
 
   @Test
+<<<<<<< HEAD
   public void required_param() throws Exception {
     request.setParam("a_required_string", "foo");
     request.setParam("a_required_number", "42");
@@ -135,6 +140,18 @@ public class RequestTest {
 
     request.setParam("a_required_string", "foo,bar");
     assertThat(request.mandatoryParamAsStrings("a_required_string")).containsExactly("foo", "bar");
+=======
+  public void mandatory_param_is_set() throws Exception {
+    request.setParam("a_string", "foo");
+    request.setParam("a_long", "42");
+    request.setParam("a_int", "42");
+    request.setParam("a_boolean", "true");
+
+    assertThat(request.mandatoryParam("a_string")).isEqualTo("foo");
+    assertThat(request.mandatoryParamAsBoolean("a_boolean")).isTrue();
+    assertThat(request.mandatoryParamAsInt("a_int")).isEqualTo(42);
+    assertThat(request.mandatoryParamAsLong("a_long")).isEqualTo(42L);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   @Test
@@ -174,6 +191,7 @@ public class RequestTest {
   }
 
   @Test
+<<<<<<< HEAD
   public void param_as_enum() throws Exception {
     assertThat(request.setParam("a_enum", "BETA").paramAsEnum("a_enum", RuleStatus.class)).isEqualTo(RuleStatus.BETA);
   }
@@ -229,5 +247,38 @@ public class RequestTest {
     } catch (IllegalArgumentException e) {
       assertThat(e).hasMessage("Value of parameter 'has_possible_values' (not_possible) must be one of: [foo, bar]");
     }
+=======
+  public void param_as_string() throws Exception {
+    String value = request.setParam("foo", "bar").param("foo", "default");
+    assertThat(value).isEqualTo("bar");
+  }
+
+  @Test
+  public void param_as_int() throws Exception {
+    assertThat(request.setParam("foo", "123").paramAsInt("foo")).isEqualTo(123);
+    assertThat(request.setParam("foo", "123").paramAsInt("xxx")).isNull();
+    assertThat(request.setParam("foo", "123").paramAsInt("foo", 456)).isEqualTo(123);
+    assertThat(request.setParam("foo", "123").paramAsInt("xxx", 456)).isEqualTo(456);
+  }
+
+  @Test
+  public void param_as_long() throws Exception {
+    assertThat(request.setParam("foo", "123").paramAsLong("foo")).isEqualTo(123L);
+    assertThat(request.setParam("foo", "123").paramAsLong("xxx")).isNull();
+    assertThat(request.setParam("foo", "123").paramAsLong("foo", 456L)).isEqualTo(123L);
+    assertThat(request.setParam("foo", "123").paramAsLong("xxx", 456L)).isEqualTo(456L);
+  }
+
+  @Test
+  public void param_as_boolean() throws Exception {
+    assertThat(request.setParam("foo", "true").paramAsBoolean("foo")).isTrue();
+    assertThat(request.setParam("foo", "false").paramAsBoolean("foo")).isFalse();
+    assertThat(request.setParam("foo", "true").paramAsBoolean("xxx")).isNull();
+
+    assertThat(request.setParam("foo", "true").paramAsBoolean("foo", true)).isTrue();
+    assertThat(request.setParam("foo", "true").paramAsBoolean("foo", false)).isTrue();
+    assertThat(request.setParam("foo", "true").paramAsBoolean("xxx", true)).isTrue();
+    assertThat(request.setParam("foo", "true").paramAsBoolean("xxx", false)).isFalse();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 }

@@ -80,4 +80,15 @@ public class Component {
     return JsonUtils.getString(json, "path");
   }
 
+<<<<<<< HEAD
+=======
+  /**
+   * @since 4.2
+   */
+  @CheckForNull
+  public String moduleKey() {
+    return JsonUtils.getString(json, "moduleKey");
+  }
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 }

@@ -22,6 +22,10 @@ package org.sonar.batch.scan.filesystem;
 import org.sonar.api.BatchComponent;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.InputFile;
+<<<<<<< HEAD
+=======
+import org.sonar.api.batch.fs.internal.UniqueIndexPredicate;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.RelativePathPredicate;
 import org.sonar.api.resources.Project;

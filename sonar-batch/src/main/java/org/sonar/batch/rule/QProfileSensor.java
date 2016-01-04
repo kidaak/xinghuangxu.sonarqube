@@ -19,6 +19,10 @@
  */
 package org.sonar.batch.rule;
 
+<<<<<<< HEAD
+=======
+import com.google.common.collect.Iterables;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
@@ -33,10 +37,19 @@ public class QProfileSensor implements Sensor {
 
   private final ModuleQProfiles moduleQProfiles;
   private final FileSystem fs;
+<<<<<<< HEAD
 
   public QProfileSensor(ModuleQProfiles moduleQProfiles, FileSystem fs) {
     this.moduleQProfiles = moduleQProfiles;
     this.fs = fs;
+=======
+  private final QualityProfileDao dao;
+
+  public QProfileSensor(ModuleQProfiles moduleQProfiles, FileSystem fs, QualityProfileDao dao) {
+    this.moduleQProfiles = moduleQProfiles;
+    this.fs = fs;
+    this.dao = dao;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   public boolean shouldExecuteOnProject(Project project) {
@@ -45,11 +58,28 @@ public class QProfileSensor implements Sensor {
   }
 
   public void analyse(Project project, SensorContext context) {
+<<<<<<< HEAD
     UsedQProfiles used = new UsedQProfiles();
     for (String language : fs.languages()) {
       QProfile profile = moduleQProfiles.findByLanguage(language);
       if (profile != null) {
         used.add(profile);
+=======
+    for (String language : fs.languages()) {
+      ModuleQProfiles.QProfile qProfile = moduleQProfiles.findByLanguage(language);
+      if (qProfile != null) {
+        dao.updateUsedColumn(qProfile.id(), true);
+      }
+    }
+    if (fs.languages().size() == 1) {
+      String language = Iterables.getOnlyElement(fs.languages());
+      ModuleQProfiles.QProfile qProfile = moduleQProfiles.findByLanguage(language);
+      if (qProfile != null) {
+        Measure measure = new Measure(CoreMetrics.PROFILE, qProfile.name()).setValue((double)qProfile.id());
+        Measure measureVersion = new Measure(CoreMetrics.PROFILE_VERSION, qProfile.version().doubleValue());
+        context.saveMeasure(measure);
+        context.saveMeasure(measureVersion);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       }
     }
     Measure detailsMeasure = new Measure(CoreMetrics.QUALITY_PROFILES, used.toJson());

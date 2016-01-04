@@ -28,7 +28,11 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.DateUtils;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.core.persistence.AbstractDaoTestCase;
 import org.sonar.core.persistence.MyBatis;
 

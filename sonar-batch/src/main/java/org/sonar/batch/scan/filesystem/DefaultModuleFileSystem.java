@@ -38,7 +38,6 @@ import org.sonar.api.utils.MessageException;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Collection;
@@ -67,6 +66,7 @@ public class DefaultModuleFileSystem extends DefaultFileSystem implements Module
   private ComponentIndexer componentIndexer;
   private boolean initialized;
 
+<<<<<<< HEAD
   /**
    * Used by scan2 
    */
@@ -85,6 +85,10 @@ public class DefaultModuleFileSystem extends DefaultFileSystem implements Module
   private DefaultModuleFileSystem(ModuleInputFileCache moduleInputFileCache, String moduleKey, Settings settings,
                                   FileIndexer indexer, ModuleFileSystemInitializer initializer,
     @Nullable ComponentIndexer componentIndexer) {
+=======
+  public DefaultModuleFileSystem(ModuleInputFileCache moduleInputFileCache, Project module, Settings settings, FileIndexer indexer, ModuleFileSystemInitializer initializer,
+                                 ComponentIndexer componentIndexer) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     super(moduleInputFileCache);
     this.componentIndexer = componentIndexer;
     this.moduleKey = moduleKey;
@@ -234,9 +238,13 @@ public class DefaultModuleFileSystem extends DefaultFileSystem implements Module
     }
     initialized = true;
     indexer.index(this);
+<<<<<<< HEAD
     if (componentIndexer != null) {
       componentIndexer.execute(this);
     }
+=======
+    componentIndexer.execute(this);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   private List<File> existingDirs(List<File> dirs) {

@@ -3,7 +3,11 @@
     {
       "key": "ABCDE",
       "component": "Action.java",
+<<<<<<< HEAD
       "componentId": 5,
+=======
+      "componentId": 10,
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       "project": "struts",
       "rule": "squid:CycleBetweenPackages",
       "severity": "CRITICAL",

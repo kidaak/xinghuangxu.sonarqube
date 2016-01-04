@@ -25,7 +25,11 @@ import org.junit.Test;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.issue.IssueComment;
 import org.sonar.api.rule.RuleKey;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import java.text.SimpleDateFormat;
 import java.util.List;

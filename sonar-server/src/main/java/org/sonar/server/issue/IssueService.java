@@ -226,7 +226,14 @@ public class IssueService implements ServerComponent {
     if (component == null || project == null) {
       throw new IllegalArgumentException("Unknown component: " + componentKey);
     }
+<<<<<<< HEAD
     if (!authorizationDao.isAuthorizedComponentKey(component.getKey(), userSession.userId(), UserRole.USER)) {
+=======
+    // Force use of correct key in case deprecated key is used
+    issue.setComponentKey(resourceDto.getKey());
+    issue.setComponentId(resourceDto.getId());
+    if (!authorizationDao.isAuthorizedComponentKey(resourceDto.getKey(), userSession.userId(), UserRole.USER)) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       // TODO throw unauthorized
       throw new IllegalStateException("User does not have the required role");
     }

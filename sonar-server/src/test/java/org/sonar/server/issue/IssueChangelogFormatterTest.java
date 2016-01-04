@@ -26,8 +26,15 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.sonar.api.i18n.I18n;
 import org.sonar.api.issue.internal.FieldDiffs;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.Durations;
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+import org.sonar.api.utils.internal.WorkDurationFactory;
+import org.sonar.core.i18n.DefaultI18n;
+import org.sonar.server.technicaldebt.DebtFormatter;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import java.util.List;
 import java.util.Locale;

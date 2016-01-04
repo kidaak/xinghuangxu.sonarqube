@@ -64,8 +64,11 @@ public interface FilePredicates {
 
   FilePredicate hasLanguages(Collection<String> languages);
 
+<<<<<<< HEAD
   FilePredicate hasLanguages(String... languages);
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   FilePredicate hasStatus(InputFile.Status status);
 
   FilePredicate hasType(InputFile.Type type);

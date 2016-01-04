@@ -25,7 +25,11 @@ import org.sonar.core.persistence.Dto;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
+<<<<<<< HEAD
 public class ComponentDto extends Dto<String> implements Component {
+=======
+public class ComponentDto implements Component {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
   private Long id;
   private String kee;
@@ -33,11 +37,16 @@ public class ComponentDto extends Dto<String> implements Component {
   private String name;
   private String longName;
   private String qualifier;
+<<<<<<< HEAD
   private String scope;
   private String language;
   private Long projectId;
   private Long subProjectId;
   private boolean enabled = true;
+=======
+  private Long projectId;
+  private Long subProjectId;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
   public Long getId() {
     return id;
@@ -99,6 +108,7 @@ public class ComponentDto extends Dto<String> implements Component {
     return this;
   }
 
+<<<<<<< HEAD
   public String scope() {
     return scope;
   }
@@ -118,6 +128,8 @@ public class ComponentDto extends Dto<String> implements Component {
     return this;
   }
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   public Long projectId() {
     return projectId;
   }
@@ -137,6 +149,7 @@ public class ComponentDto extends Dto<String> implements Component {
     return this;
   }
 
+<<<<<<< HEAD
   public boolean isEnabled() {
     return enabled;
   }
@@ -151,6 +164,8 @@ public class ComponentDto extends Dto<String> implements Component {
     return kee;
   }
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -173,5 +188,8 @@ public class ComponentDto extends Dto<String> implements Component {
   public int hashCode() {
     return id.hashCode();
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 }

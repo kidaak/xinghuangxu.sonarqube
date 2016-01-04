@@ -41,7 +41,11 @@ public abstract class Request {
   public abstract String method();
 
   /**
+<<<<<<< HEAD
    * Returns a non-null value. To be used when parameter is required or has a default value.
+=======
+   * Returns value of a mandatory parameter
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
    *
    * @throws java.lang.IllegalArgumentException is value is null or blank
    */
@@ -54,7 +58,11 @@ public abstract class Request {
   }
 
   /**
+<<<<<<< HEAD
    * Returns a boolean value. To be used when parameter is required or has a default value.
+=======
+   * Returns value of a mandatory parameter
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
    *
    * @throws java.lang.IllegalArgumentException is value is null or blank
    */
@@ -64,7 +72,11 @@ public abstract class Request {
   }
 
   /**
+<<<<<<< HEAD
    * Returns an int value. To be used when parameter is required or has a default value.
+=======
+   * Returns value of a mandatory parameter
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
    *
    * @throws java.lang.IllegalArgumentException is value is null or blank
    */
@@ -74,7 +86,11 @@ public abstract class Request {
   }
 
   /**
+<<<<<<< HEAD
    * Returns a long value. To be used when parameter is required or has a default value.
+=======
+   * Returns value of a mandatory parameter
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
    *
    * @throws java.lang.IllegalArgumentException is value is null or blank
    */
@@ -83,6 +99,7 @@ public abstract class Request {
     return Long.parseLong(s);
   }
 
+<<<<<<< HEAD
   public <E extends Enum<E>> E mandatoryParamAsEnum(String key, Class<E> enumClass) {
     return Enum.valueOf(enumClass, mandatoryParam(key));
   }
@@ -94,6 +111,10 @@ public abstract class Request {
     }
     return values;
   }
+=======
+  @CheckForNull
+  public abstract String param(String key);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
   @CheckForNull
   public List<String> paramAsStrings(String key) {
@@ -116,21 +137,29 @@ public abstract class Request {
     return StringUtils.defaultString(param(key), defaultValue);
   }
 
+<<<<<<< HEAD
   /**
    * @deprecated to be dropped in 4.4. Default values must be declared in {@link org.sonar.api.server.ws.WebService} then
    * this method can be replaced by {@link #mandatoryParamAsBoolean(String)}.
    */
   @Deprecated
   public boolean paramAsBoolean(String key, boolean defaultValue) {
+=======
+  @CheckForNull
+  public Integer paramAsInt(String key) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     String s = param(key);
     return s == null ? defaultValue : Boolean.parseBoolean(s);
   }
 
+<<<<<<< HEAD
   /**
    * @deprecated to be dropped in 4.4. Default values must be declared in {@link org.sonar.api.server.ws.WebService} then
    * this method can be replaced by {@link #mandatoryParamAsInt(String)}.
    */
   @Deprecated
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   public int paramAsInt(String key, int defaultValue) {
     String s = param(key);
     return s == null ? defaultValue : Integer.parseInt(s);
@@ -148,13 +177,31 @@ public abstract class Request {
 
 
   @CheckForNull
+<<<<<<< HEAD
+=======
+  public Long paramAsLong(String key) {
+    String s = param(key);
+    return s == null ? null : Long.parseLong(s);
+  }
+
+  public long paramAsLong(String key, long defaultValue) {
+    String s = param(key);
+    return s == null ? defaultValue : Long.parseLong(s);
+  }
+
+  @CheckForNull
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   public Boolean paramAsBoolean(String key) {
     String s = param(key);
     return s == null ? null : Boolean.parseBoolean(s);
   }
 
+<<<<<<< HEAD
   @CheckForNull
   public Integer paramAsInt(String key) {
+=======
+  public boolean paramAsBoolean(String key, boolean defaultValue) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     String s = param(key);
     return s == null ? null : Integer.parseInt(s);
   }

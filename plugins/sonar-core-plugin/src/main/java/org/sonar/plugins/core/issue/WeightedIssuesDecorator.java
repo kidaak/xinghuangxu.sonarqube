@@ -43,6 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 @Properties(@Property(
   key = CoreProperties.CORE_RULE_WEIGHTS_PROPERTY,
   defaultValue = CoreProperties.CORE_RULE_WEIGHTS_DEFAULT_VALUE,
@@ -51,6 +52,18 @@ import java.util.Map;
   project = false,
   global = true,
   category = CoreProperties.CATEGORY_GENERAL))
+=======
+@Properties(
+  @Property(
+    key = CoreProperties.CORE_RULE_WEIGHTS_PROPERTY,
+    defaultValue = CoreProperties.CORE_RULE_WEIGHTS_DEFAULT_VALUE,
+    name = "Rules weight",
+    description = "A weight is associated to each severity to emphasize the most critical issues.",
+    project = false,
+    global = true,
+    category = CoreProperties.CATEGORY_GENERAL)
+)
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 public class WeightedIssuesDecorator implements Decorator {
 
   private Settings settings;

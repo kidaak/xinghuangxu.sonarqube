@@ -37,10 +37,13 @@ public interface Issue {
 
   String componentKey();
 
+<<<<<<< HEAD
   /**
    * @deprecated since 4.4. Use {@link #componentKey()} instead
    */
   @Deprecated
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   Long componentId();
 
   String projectKey();

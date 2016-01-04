@@ -24,7 +24,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+<<<<<<< HEAD
 import org.sonar.api.batch.fs.internal.DeprecatedDefaultInputFile;
+=======
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.resources.JavaFile;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.scan.filesystem.PathResolver;
 import org.sonar.batch.bootstrap.AnalysisMode;
 import org.sonar.batch.util.DeprecatedKeyUtils;
@@ -76,6 +81,7 @@ class InputFileBuilder {
   }
 
   @CheckForNull
+<<<<<<< HEAD
   DeprecatedDefaultInputFile create(File file) {
     String relativePath = pathResolver.relativePath(fs.baseDir(), file);
     if (relativePath == null) {
@@ -83,6 +89,16 @@ class InputFileBuilder {
       return null;
     }
     DeprecatedDefaultInputFile inputFile = new DeprecatedDefaultInputFile(relativePath);
+=======
+  DefaultInputFile create(File file) {
+    String relativePath = pathResolver.relativePath(fs.baseDir(), file);
+    if (relativePath == null) {
+      LoggerFactory.getLogger(getClass()).warn(
+        "File '%s' is ignored. It is not located in module basedir '%s'.", file.getAbsolutePath(), fs.baseDir());
+      return null;
+    }
+    DefaultInputFile inputFile = new DefaultInputFile(relativePath);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     inputFile.setBasedir(fs.baseDir());
     inputFile.setFile(file);
     return inputFile;
@@ -92,7 +108,11 @@ class InputFileBuilder {
    * Optimization to not set all InputFile data if the file is excluded from analysis.
    */
   @CheckForNull
+<<<<<<< HEAD
   DeprecatedDefaultInputFile complete(DeprecatedDefaultInputFile inputFile, InputFile.Type type) {
+=======
+  DefaultInputFile complete(DefaultInputFile inputFile, InputFile.Type type) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     inputFile.setType(type);
     inputFile.setKey(new StringBuilder().append(moduleKey).append(":").append(inputFile.relativePath()).toString());
     inputFile.setBasedir(fs.baseDir());

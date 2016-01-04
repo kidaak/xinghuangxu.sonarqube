@@ -5,7 +5,11 @@
   <groupId>org.codehaus.sonar</groupId>
   <artifactId>sonar</artifactId>
   <packaging>pom</packaging>
+<<<<<<< HEAD
   <version>4.4.1-SNAPSHOT</version>
+=======
+  <version>4.2.1-SNAPSHOT</version>
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   <name>SonarQube</name>
   <url>http://www.sonarqube.org/</url>
   <description>Open source platform for continuous inspection of code quality</description>
@@ -68,8 +72,13 @@
   </prerequisites>
 
   <properties>
+<<<<<<< HEAD
     <sonarUpdateCenter.version>1.11</sonarUpdateCenter.version>
     <sonarJava.version>2.2.1</sonarJava.version>
+=======
+    <sonarUpdateCenter.version>1.8</sonarUpdateCenter.version>
+    <sonarJava.version>2.1</sonarJava.version>
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     <h2.version>1.3.172</h2.version>
     <jetty.version>8.1.12.v20130726</jetty.version>
     <logback.version>1.0.13</logback.version>

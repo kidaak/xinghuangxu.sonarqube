@@ -20,6 +20,14 @@
 package org.sonar.api.batch.fs.internal;
 
 import com.google.common.base.Preconditions;
+<<<<<<< HEAD
+=======
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
@@ -30,6 +38,7 @@ import javax.annotation.Nullable;
 
 import java.io.File;
 import java.nio.charset.Charset;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -38,6 +47,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+=======
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.SortedSet;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 /**
  * @since 4.2
@@ -45,7 +61,11 @@ import java.util.TreeSet;
 public class DefaultFileSystem implements FileSystem {
 
   private final Cache cache;
+<<<<<<< HEAD
   private final SortedSet<String> languages = new TreeSet<String>();
+=======
+  private final SortedSet<String> languages = Sets.newTreeSet();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   private File baseDir, workDir;
   private Charset encoding;
   private final FilePredicates predicates = new DefaultFilePredicates();

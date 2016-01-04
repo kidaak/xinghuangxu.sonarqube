@@ -19,7 +19,21 @@
  */
 package org.sonar.server.issue.filter;
 
+<<<<<<< HEAD
 import org.sonar.api.server.ws.WebService;
+=======
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.server.ws.Request;
+import org.sonar.api.server.ws.RequestHandler;
+import org.sonar.api.server.ws.Response;
+import org.sonar.api.server.ws.WebService;
+import org.sonar.api.utils.text.JsonWriter;
+import org.sonar.core.issue.DefaultIssueFilter;
+import org.sonar.core.permission.GlobalPermissions;
+import org.sonar.server.user.UserSession;
+
+import java.util.List;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 public class IssueFilterWs implements WebService {
 
@@ -37,6 +51,7 @@ public class IssueFilterWs implements WebService {
   public void define(Context context) {
     NewController controller = context.createController("api/issue_filters")
       .setSince("4.2")
+<<<<<<< HEAD
       .setDescription("Issue Filters management");
     appAction.define(controller);
     showAction.define(controller);
@@ -44,4 +59,106 @@ public class IssueFilterWs implements WebService {
     controller.done();
   }
 
+=======
+      .setDescription("Issue Filters");
+
+    NewAction app = controller.createAction("page");
+    app
+      .setDescription("Data required for rendering page 'Issues'. Internal use only.")
+      .setInternal(true)
+      .setHandler(new RequestHandler() {
+        @Override
+        public void handle(Request request, Response response) {
+          app(request, response);
+        }
+      });
+
+    NewAction show = controller.createAction("show");
+    show
+      .setDescription("Get detail of issue filter")
+      .setSince("4.2")
+      .setHandler(new RequestHandler() {
+        @Override
+        public void handle(Request request, Response response) {
+          show(request, response);
+        }
+      })
+      .createParam("id");
+
+    controller.done();
+  }
+
+  private void app(Request request, Response response) {
+    UserSession session = UserSession.get();
+
+    JsonWriter json = response.newJsonWriter();
+    json.beginObject();
+
+    // Current filter (optional)
+    int filterId = request.paramAsInt("id", -1);
+    DefaultIssueFilter filter = null;
+    if (filterId >= 0) {
+      filter = service.find((long) filterId, session);
+    }
+
+    // Permissions
+    json.prop("canManageFilters", session.isLoggedIn());
+    json.prop("canBulkChange", session.isLoggedIn());
+
+    // Selected filter
+    if (filter != null) {
+      json.name("filter");
+      writeFilterJson(session, filter, json);
+    }
+
+    // Favorite filters, if logged in
+    if (session.isLoggedIn()) {
+      List<DefaultIssueFilter> favorites = service.findFavoriteFilters(session);
+      json.name("favorites").beginArray();
+      for (DefaultIssueFilter favorite : favorites) {
+        json
+          .beginObject()
+          .prop("id", favorite.id())
+          .prop("name", favorite.name())
+          .endObject();
+      }
+      json.endArray();
+    }
+
+    json.endObject();
+    json.close();
+  }
+
+  private void show(Request request, Response response) {
+    UserSession session = UserSession.get();
+    DefaultIssueFilter filter = service.find(Long.parseLong(request.mandatoryParam("id")), session);
+
+
+    JsonWriter json = response.newJsonWriter();
+    json.beginObject();
+
+    json.name("filter");
+    writeFilterJson(session, filter, json);
+
+    json.endObject();
+    json.close();
+  }
+
+  private JsonWriter writeFilterJson(UserSession session, DefaultIssueFilter filter, JsonWriter json) {
+    return json.beginObject()
+      .prop("id", filter.id())
+      .prop("name", filter.name())
+      .prop("description", filter.description())
+      .prop("user", filter.user())
+      .prop("shared", filter.shared())
+      .prop("query", filter.data())
+      .prop("canModify", canModifyFilter(session, filter))
+      .endObject();
+  }
+
+  private boolean canModifyFilter(UserSession session, DefaultIssueFilter filter) {
+    return session.isLoggedIn() &&
+      (StringUtils.equals(filter.user(), session.login()) || session.hasGlobalPermission(GlobalPermissions.SYSTEM_ADMIN));
+  }
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 }

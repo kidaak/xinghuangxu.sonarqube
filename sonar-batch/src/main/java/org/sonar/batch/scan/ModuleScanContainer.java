@@ -57,8 +57,13 @@ import org.sonar.batch.issue.ignore.scanner.IssueExclusionsRegexpScanner;
 import org.sonar.batch.language.LanguageDistributionDecorator;
 import org.sonar.batch.phases.PhaseExecutor;
 import org.sonar.batch.phases.PhasesTimeProfiler;
+<<<<<<< HEAD
 import org.sonar.batch.qualitygate.GenerateQualityGateEvents;
 import org.sonar.batch.qualitygate.QualityGateProvider;
+=======
+import org.sonar.batch.rule.QProfileVerifier;
+import org.sonar.batch.qualitygate.QualityGateLoader;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.batch.qualitygate.QualityGateVerifier;
 import org.sonar.batch.rule.ActiveRulesProvider;
 import org.sonar.batch.rule.ModuleQProfiles;
@@ -72,6 +77,7 @@ import org.sonar.batch.scan.filesystem.DefaultModuleFileSystem;
 import org.sonar.batch.scan.filesystem.DeprecatedFileFilters;
 import org.sonar.batch.scan.filesystem.ExclusionFilters;
 import org.sonar.batch.scan.filesystem.FileIndexer;
+<<<<<<< HEAD
 import org.sonar.batch.scan.filesystem.FileSystemLogger;
 import org.sonar.batch.scan.filesystem.InputFileBuilderFactory;
 import org.sonar.batch.scan.filesystem.LanguageDetectionFactory;
@@ -80,6 +86,8 @@ import org.sonar.batch.scan.filesystem.ModuleInputFileCache;
 import org.sonar.batch.scan.filesystem.PreviousFileHashLoader;
 import org.sonar.batch.scan.filesystem.ProjectFileSystemAdapter;
 import org.sonar.batch.scan.filesystem.StatusDetectionFactory;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.batch.scan.report.JsonReport;
 import org.sonar.batch.scan2.AnalyzerOptimizer;
 import org.sonar.core.component.ScanPerspectives;
@@ -137,8 +145,11 @@ public class ModuleScanContainer extends ComponentContainer {
       ModuleFileSystemInitializer.class,
       ProjectFileSystemAdapter.class,
       QProfileVerifier.class,
+<<<<<<< HEAD
 
       AnalyzerOptimizer.class,
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
       // the Snapshot component will be removed when asynchronous measures are improved (required for AsynchronousMeasureSensor)
       getComponentByType(ResourcePersister.class).getSnapshot(module),
@@ -154,9 +165,14 @@ public class ModuleScanContainer extends ComponentContainer {
       ResourceFilters.class,
 
       // quality gates
+<<<<<<< HEAD
       new QualityGateProvider(),
       QualityGateVerifier.class,
       GenerateQualityGateEvents.class,
+=======
+      QualityGateLoader.class,
+      QualityGateVerifier.class,
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
       // rules
       ModuleQProfiles.class,

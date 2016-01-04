@@ -32,6 +32,7 @@ import java.util.SortedSet;
  * <p/>
  * This is not an extension point so it must not be implemented by plugins. It must be injected as a
  * constructor parameter :
+<<<<<<< HEAD
  * <pre>
  * public class MySensor implements Sensor {
  *   private final FileSystem fs;
@@ -47,6 +48,23 @@ import java.util.SortedSet;
  * {@link org.sonar.api.batch.fs.internal.DefaultFileSystem} and the related {@link org.sonar.api.batch.fs.internal.DefaultInputFile},
  * for example :
  * <pre>
+=======
+ * <pre>
+ * public class MySensor implements Sensor {
+ *   private final FileSystem fs;
+ *
+ *   public MySensor(FileSystem fs) {
+ *     this.fs = fs;
+ *   }
+ * }
+ * </pre>
+ *
+ * <h2>How to use in unit tests</h2>
+ * The unit tests needing an instance of FileSystem can use the implementation
+ * {@link org.sonar.api.batch.fs.internal.DefaultFileSystem} and the related {@link org.sonar.api.batch.fs.internal.DefaultInputFile},
+ * for example :
+ * <pre>
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * DefaultFileSystem fs = new DefaultFileSystem();
  * fs.add(new DefaultInputFile("src/foo/bar.php"));
  * </pre>

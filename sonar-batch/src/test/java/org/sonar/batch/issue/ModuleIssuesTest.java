@@ -39,6 +39,11 @@ import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.MessageException;
+<<<<<<< HEAD
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+import org.sonar.batch.debt.RuleDebtCalculator;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import java.util.Calendar;
 import java.util.Date;

@@ -20,42 +20,31 @@
 package org.sonar.plugins.core;
 
 import com.google.common.collect.ImmutableList;
-import org.sonar.api.CoreProperties;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
-import org.sonar.api.PropertyType;
-import org.sonar.api.SonarPlugin;
+import org.sonar.api.*;
 import org.sonar.api.checks.NoSonarFilter;
+<<<<<<< HEAD
+=======
+import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.utils.internal.WorkDurationFactory;
+import org.sonar.batch.components.PastSnapshotFinder;
+import org.sonar.batch.debt.IssueChangelogDebtCalculator;
+import org.sonar.batch.issue.ignore.IssueExclusionsConfiguration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.core.timemachine.Periods;
 import org.sonar.plugins.core.batch.IndexProjectPostJob;
 import org.sonar.plugins.core.charts.DistributionAreaChart;
 import org.sonar.plugins.core.charts.DistributionBarChart;
 import org.sonar.plugins.core.charts.XradarChart;
 import org.sonar.plugins.core.colorizers.JavaColorizerFormat;
-import org.sonar.plugins.core.dashboards.GlobalDefaultDashboard;
-import org.sonar.plugins.core.dashboards.ProjectDefaultDashboard;
-import org.sonar.plugins.core.dashboards.ProjectHotspotDashboard;
-import org.sonar.plugins.core.dashboards.ProjectIssuesDashboard;
-import org.sonar.plugins.core.dashboards.ProjectTimeMachineDashboard;
-import org.sonar.plugins.core.issue.CountFalsePositivesDecorator;
-import org.sonar.plugins.core.issue.CountUnresolvedIssuesDecorator;
-import org.sonar.plugins.core.issue.InitialOpenIssuesSensor;
-import org.sonar.plugins.core.issue.InitialOpenIssuesStack;
-import org.sonar.plugins.core.issue.IssueHandlers;
-import org.sonar.plugins.core.issue.IssueTracking;
-import org.sonar.plugins.core.issue.IssueTrackingDecorator;
-import org.sonar.plugins.core.issue.IssuesDensityDecorator;
-import org.sonar.plugins.core.issue.WeightedIssuesDecorator;
-import org.sonar.plugins.core.issue.notification.ChangesOnMyIssueNotificationDispatcher;
-import org.sonar.plugins.core.issue.notification.IssueChangesEmailTemplate;
-import org.sonar.plugins.core.issue.notification.NewFalsePositiveNotificationDispatcher;
-import org.sonar.plugins.core.issue.notification.NewIssuesEmailTemplate;
-import org.sonar.plugins.core.issue.notification.NewIssuesNotificationDispatcher;
-import org.sonar.plugins.core.issue.notification.SendIssueNotificationsPostJob;
+import org.sonar.plugins.core.dashboards.*;
+import org.sonar.plugins.core.issue.*;
+import org.sonar.plugins.core.issue.notification.*;
 import org.sonar.plugins.core.measurefilters.MyFavouritesFilter;
 import org.sonar.plugins.core.measurefilters.ProjectFilter;
 import org.sonar.plugins.core.notifications.alerts.NewAlerts;
 import org.sonar.plugins.core.security.ApplyProjectRolesDecorator;
+<<<<<<< HEAD
 import org.sonar.plugins.core.sensors.BranchCoverageDecorator;
 import org.sonar.plugins.core.sensors.CommentDensityDecorator;
 import org.sonar.plugins.core.sensors.CoverageDecorator;
@@ -114,6 +103,16 @@ import org.sonar.plugins.core.widgets.measures.MeasureFilterAsHistogramWidget;
 import org.sonar.plugins.core.widgets.measures.MeasureFilterAsPieChartWidget;
 import org.sonar.plugins.core.widgets.measures.MeasureFilterListWidget;
 import org.sonar.plugins.core.widgets.measures.MeasureFilterTreemapWidget;
+=======
+import org.sonar.plugins.core.sensors.*;
+import org.sonar.plugins.core.technicaldebt.NewTechnicalDebtDecorator;
+import org.sonar.plugins.core.technicaldebt.TechnicalDebtDecorator;
+import org.sonar.plugins.core.timemachine.*;
+import org.sonar.plugins.core.web.TestsViewer;
+import org.sonar.plugins.core.widgets.*;
+import org.sonar.plugins.core.widgets.issues.*;
+import org.sonar.plugins.core.widgets.measures.*;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import java.util.List;
 
@@ -351,6 +350,10 @@ public final class CorePlugin extends SonarPlugin {
       ProjectLinksSensor.class,
       UnitTestDecorator.class,
       VersionEventsSensor.class,
+<<<<<<< HEAD
+=======
+      GenerateAlertEvents.class,
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       LineCoverageDecorator.class,
       CoverageDecorator.class,
       BranchCoverageDecorator.class,

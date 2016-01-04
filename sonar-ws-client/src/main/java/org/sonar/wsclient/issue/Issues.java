@@ -54,9 +54,12 @@ public interface Issues {
   @CheckForNull
   Component componentById(long id);
 
+<<<<<<< HEAD
   @CheckForNull
   Component componentByKey(String key);
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   Collection<Component> projects();
 
   @CheckForNull

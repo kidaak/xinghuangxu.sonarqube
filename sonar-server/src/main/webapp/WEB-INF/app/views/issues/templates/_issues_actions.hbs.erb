@@ -2,7 +2,11 @@
   {{#unless maxResultsReached}}
     <div class="navigator-actions-order">
       {{#if sorting}}
+<<<<<<< HEAD
         <%= message('issues.ordered_by') -%> <strong class="navigator-actions-ordered-by">{{sorting.sortText}}</strong> {{#if sorting.asc}}<i class="icon-sort-asc"></i>{{else}}<i class="icon-sort-desc"></i>{{/if}}
+=======
+        <%= message('issues.ordered_by') -%> <strong class="navigator-actions-ordered-by">{{sorting.sortText}}</strong> {{#if sorting.asc}}<i class="icon-arrow-up"></i>{{else}}<i class="icon-arrow-down"></i>{{/if}}
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       {{else}}
         Order
       {{/if}}
@@ -18,6 +22,7 @@
   {{/unless}}
   <div class="navigator-actions-total">
     <%= message('issues.found') -%>: <strong>{{paging.fTotal}}</strong>
+<<<<<<< HEAD
     {{#notEq paging.fTotal 0}}
       {{#if appState.canBulkChange}}
         <a href="<%= url_for params.merge({:action => 'bulk_change_form'}) -%>?{{query}}"
@@ -25,5 +30,12 @@
            title="<%= message('bulk_change') -%>"><i class="icon-bulk-change"></i></a>
       {{/if}}
     {{/notEq}}
+=======
+    {{#if appState.canBulkChange}}
+      <a href="<%= url_for params.merge({:action => 'bulk_change_form'}) -%>?{{query}}"
+         class="navigator-actions-bulk"
+         title="<%= message('bulk_change') -%>"><i class="icon-settings-multiple"></i></a>
+    {{/if}}
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   </div>
 </script>

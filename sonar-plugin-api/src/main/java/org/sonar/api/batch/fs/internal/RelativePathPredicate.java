@@ -1,6 +1,6 @@
 /*
  * SonarQube, open source software quality management tool.
- * Copyright (C) 2008-2014 SonarSource
+ * Copyright (C) 2008-2013 SonarSource
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -19,28 +19,34 @@
  */
 package org.sonar.api.batch.fs.internal;
 
+import org.apache.commons.io.FilenameUtils;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.utils.PathUtils;
 
 /**
  * @since 4.2
  */
-public class RelativePathPredicate implements FilePredicate {
+class RelativePathPredicate implements FilePredicate, UniqueIndexPredicate {
 
   private final String path;
 
   RelativePathPredicate(String path) {
-    this.path = PathUtils.sanitize(path);
-  }
-
-  public String path() {
-    return path;
+    this.path = FilenameUtils.normalize(path, true);
   }
 
   @Override
   public boolean apply(InputFile f) {
     return path.equals(f.relativePath());
+  }
+
+  @Override
+  public Object value() {
+    return path;
+  }
+
+  @Override
+  public String indexId() {
+    return RelativePathIndex.ID;
   }
 
 }

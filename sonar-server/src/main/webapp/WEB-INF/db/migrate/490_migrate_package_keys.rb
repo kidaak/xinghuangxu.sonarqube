@@ -1,6 +1,6 @@
 #
 # SonarQube, open source software quality management tool.
-# Copyright (C) 2008-2014 SonarSource
+# Copyright (C) 2008-2013 SonarSource
 # mailto:contact AT sonarsource DOT com
 #
 # SonarQube is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@
 class MigratePackageKeys < ActiveRecord::Migration
 
   def self.up
-    execute_java_migration('org.sonar.server.db.migrations.v42.PackageKeysMigration')
+    Java::OrgSonarServerUi::JRubyFacade.getInstance().databaseMigrator().executeMigration('org.sonar.server.db.migrations.packageKeys42.PackageKeysMigration')
   end
 
 end

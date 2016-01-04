@@ -41,6 +41,7 @@ public class IssuesWs implements WebService {
     controller.setDescription("Coding rule issues");
     controller.setSince("3.6");
 
+<<<<<<< HEAD
     showAction.define(controller);
     searchAction.define(controller);
 
@@ -56,6 +57,14 @@ public class IssuesWs implements WebService {
     defineCreateAction(controller);
     defineDoActionAction(controller);
     defineBulkChangeAction(controller);
+=======
+    controller.createAction("show")
+      .setDescription("Detail of issue")
+      .setSince("4.2")
+      .setInternal(true)
+      .setHandler(showHandler)
+      .createParam("key", "Issue key");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
     controller.done();
   }

@@ -33,7 +33,11 @@ import org.sonar.api.issue.Issue;
 import org.sonar.api.issue.IssueComment;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rule.Severity;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;

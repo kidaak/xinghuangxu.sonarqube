@@ -88,10 +88,21 @@ public final class PhaseExecutor {
     this.issueExclusionsLoader = issueExclusionsLoader;
   }
 
+<<<<<<< HEAD
   public static Collection<Class> getPhaseClasses() {
     return Lists.<Class>newArrayList(DecoratorsExecutor.class, MavenPluginsConfigurator.class,
       PostJobsExecutor.class, SensorsExecutor.class,
       InitializersExecutor.class, ProjectInitializer.class, UpdateStatusJob.class);
+=======
+  public PhaseExecutor(Phases phases, DecoratorsExecutor decoratorsExecutor, MavenPhaseExecutor mavenPhaseExecutor,
+    MavenPluginsConfigurator mavenPluginsConfigurator, InitializersExecutor initializersExecutor,
+    PostJobsExecutor postJobsExecutor, SensorsExecutor sensorsExecutor,
+    PersistenceManager persistenceManager, SensorContext sensorContext, DefaultIndex index,
+    EventBus eventBus, ProjectInitializer pi, ScanPersister[] persisters, FileSystemLogger fsLogger, JsonReport jsonReport,
+    DefaultModuleFileSystem fs, QProfileVerifier profileVerifier, IssueExclusionsLoader issueExclusionsLoader) {
+    this(phases, decoratorsExecutor, mavenPhaseExecutor, mavenPluginsConfigurator, initializersExecutor, postJobsExecutor,
+      sensorsExecutor, persistenceManager, sensorContext, index, eventBus, null, pi, persisters, fsLogger, jsonReport, fs, profileVerifier, issueExclusionsLoader);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   /**

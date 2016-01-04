@@ -113,6 +113,92 @@ public class QProfiles implements ServerComponent {
     projectOperations.removeAllProjects(profileId, UserSession.get());
   }
 
+<<<<<<< HEAD
+=======
+
+  // PROFILE RULES
+
+  @CheckForNull
+  public QProfileRule findByRule(int ruleId) {
+    return rules.findByRuleId(ruleId);
+  }
+
+  @CheckForNull
+  public QProfileRule findByActiveRuleId(int activeRuleId) {
+    return rules.findByActiveRuleId(activeRuleId);
+  }
+
+  @CheckForNull
+  public QProfileRule findByProfileAndRule(int profileId, int ruleId) {
+    return rules.findByProfileIdAndRuleId(profileId, ruleId);
+  }
+
+  public QProfileRuleLookup.QProfileRuleResult searchProfileRules(ProfileRuleQuery query, Paging paging) {
+    return rules.search(query, paging);
+  }
+
+  public long countProfileRules(ProfileRuleQuery query) {
+    return rules.countProfileRules(query);
+  }
+
+  public QProfileRuleLookup.QProfileRuleResult searchInactiveProfileRules(ProfileRuleQuery query, Paging paging) {
+    return rules.searchInactives(query, paging);
+  }
+
+  public long countInactiveProfileRules(ProfileRuleQuery query) {
+    return rules.countInactiveProfileRules(query);
+  }
+
+  public long countProfileRules(QProfile profile) {
+    return rules.countProfileRules(ProfileRuleQuery.create(profile.id()));
+  }
+
+  public long countOverridingProfileRules(QProfile profile) {
+    return rules.countProfileRules(ProfileRuleQuery.create(profile.id()).setInheritance(QProfileRule.OVERRIDES));
+  }
+
+  public void activateRule(int profileId, int ruleId, String severity) {
+    activeRuleOperations.activateRule(profileId, ruleId, severity, UserSession.get());
+  }
+
+  public int bulkActivateRule(ProfileRuleQuery query) {
+    return activeRuleOperations.activateRules(query.profileId(), query, UserSession.get());
+  }
+
+  public void deactivateRule(int profileId, int ruleId) {
+    activeRuleOperations.deactivateRule(profileId, ruleId, UserSession.get());
+  }
+
+  public int bulkDeactivateRule(ProfileRuleQuery query) {
+    return activeRuleOperations.deactivateRules(query, UserSession.get());
+  }
+
+  public void updateActiveRuleParam(int activeRuleId, String key, @Nullable String value) {
+    activeRuleOperations.updateActiveRuleParam(activeRuleId, key, value, UserSession.get());
+  }
+
+  public void revertActiveRule(int activeRuleId) {
+    activeRuleOperations.revertActiveRule(activeRuleId, UserSession.get());
+  }
+
+  public void updateActiveRuleNote(int activeRuleId, String note) {
+    activeRuleOperations.updateActiveRuleNote(activeRuleId, note, UserSession.get());
+  }
+
+  public void deleteActiveRuleNote(int activeRuleId) {
+    activeRuleOperations.deleteActiveRuleNote(activeRuleId, UserSession.get());
+  }
+
+  @CheckForNull
+  public QProfileRule parentProfileRule(QProfileRule rule) {
+    return rules.findParentProfileRule(rule);
+  }
+
+  public long countActiveRules(int ruleId) {
+    return rules.countProfileRules(ruleId);
+  }
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   private void checkProfileNameParam(String name) {
     if (Strings.isNullOrEmpty(name)) {
       throw new BadRequestException("quality_profiles.please_type_profile_name");

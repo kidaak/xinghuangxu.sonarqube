@@ -93,6 +93,7 @@ public class IssuesWsTest {
     assertThat(show.handler()).isNotNull();
     assertThat(show.since()).isEqualTo("3.6");
     assertThat(show.isPost()).isFalse();
+<<<<<<< HEAD
     assertThat(show.isInternal()).isFalse();
     assertThat(show.handler()).isSameAs(searchAction);
     assertThat(show.responseExampleAsString()).isNotEmpty();
@@ -261,6 +262,10 @@ public class IssuesWsTest {
     assertThat(action.isInternal()).isFalse();
     assertThat(action.handler()).isInstanceOf(RailsHandler.class);
     assertThat(action.params()).hasSize(9);
+=======
+    assertThat(show.isInternal()).isTrue();
+    assertThat(show.handler()).isSameAs(showHandler);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
 }

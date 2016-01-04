@@ -1,6 +1,10 @@
 /*
  * SonarQube, open source software quality management tool.
+<<<<<<< HEAD
  * Copyright (C) 2008-2014 SonarSource
+=======
+ * Copyright (C) 2008-2013 SonarSource
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -30,4 +34,8 @@ class FalsePredicate implements FilePredicate {
   public boolean apply(InputFile inputFile) {
     return false;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2

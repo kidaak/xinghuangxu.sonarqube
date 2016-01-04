@@ -67,7 +67,11 @@ public class InputFileBuilderTest {
 
     InputFileBuilder builder = new InputFileBuilder("struts", new PathResolver(),
       langDetection, statusDetection, fs, analysisMode);
+<<<<<<< HEAD
     DeprecatedDefaultInputFile inputFile = builder.create(srcFile);
+=======
+    DefaultInputFile inputFile = builder.create(srcFile);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     inputFile = builder.complete(inputFile, InputFile.Type.MAIN);
 
     assertThat(inputFile.type()).isEqualTo(InputFile.Type.MAIN);
@@ -93,7 +97,11 @@ public class InputFileBuilderTest {
 
     InputFileBuilder builder = new InputFileBuilder("struts", new PathResolver(),
       langDetection, statusDetection, fs, analysisMode);
+<<<<<<< HEAD
     DeprecatedDefaultInputFile inputFile = builder.create(srcFile);
+=======
+    DefaultInputFile inputFile = builder.create(srcFile);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
     assertThat(inputFile).isNull();
   }
@@ -113,7 +121,11 @@ public class InputFileBuilderTest {
 
     InputFileBuilder builder = new InputFileBuilder("struts", new PathResolver(),
       langDetection, statusDetection, fs, analysisMode);
+<<<<<<< HEAD
     DeprecatedDefaultInputFile inputFile = builder.create(srcFile);
+=======
+    DefaultInputFile inputFile = builder.create(srcFile);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     inputFile = builder.complete(inputFile, InputFile.Type.MAIN);
 
     assertThat(inputFile).isNull();
@@ -140,7 +152,11 @@ public class InputFileBuilderTest {
 
     InputFileBuilder builder = new InputFileBuilder("struts", new PathResolver(),
       langDetection, statusDetection, fs, analysisMode);
+<<<<<<< HEAD
     DeprecatedDefaultInputFile inputFile = builder.create(srcFile);
+=======
+    DefaultInputFile inputFile = builder.create(srcFile);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     inputFile = builder.complete(inputFile, InputFile.Type.MAIN);
 
     assertThat(inputFile.pathRelativeToSourceDir()).isEqualTo("foo/Bar.java");
@@ -169,7 +185,11 @@ public class InputFileBuilderTest {
 
     InputFileBuilder builder = new InputFileBuilder("struts", new PathResolver(),
       langDetection, statusDetection, fs, analysisMode);
+<<<<<<< HEAD
     DeprecatedDefaultInputFile inputFile = builder.create(srcFile);
+=======
+    DefaultInputFile inputFile = builder.create(srcFile);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     inputFile = builder.complete(inputFile, InputFile.Type.MAIN);
 
     assertThat(inputFile.pathRelativeToSourceDir()).isEqualTo("foo/Bar.php");

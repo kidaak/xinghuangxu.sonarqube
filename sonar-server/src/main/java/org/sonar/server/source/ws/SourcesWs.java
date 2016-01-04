@@ -34,11 +34,23 @@ public class SourcesWs implements WebService {
 
   @Override
   public void define(Context context) {
+<<<<<<< HEAD
     NewController controller = context.createController("api/sources")
       .setSince("4.2")
       .setDescription("Display sources information");
     showAction.define(controller);
     scmAction.define(controller);
+=======
+    NewController controller = context.createController("api/sources");
+
+    controller.createAction("show")
+      .setDescription("Show source of a component")
+      .setSince("4.2")
+      .setInternal(true)
+      .setHandler(showHandler)
+      .createParam("key", "Component key");
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     controller.done();
   }
 }

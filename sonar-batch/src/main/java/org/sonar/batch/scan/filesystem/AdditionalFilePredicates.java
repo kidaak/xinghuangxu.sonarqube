@@ -1,6 +1,6 @@
 /*
  * SonarQube, open source software quality management tool.
- * Copyright (C) 2008-2014 SonarSource
+ * Copyright (C) 2008-2013 SonarSource
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ package org.sonar.batch.scan.filesystem;
 import org.apache.commons.io.FilenameUtils;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.DeprecatedDefaultInputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 
 /**
  * Additional {@link org.sonar.api.batch.fs.FilePredicate}s that are
@@ -43,7 +43,7 @@ class AdditionalFilePredicates {
 
     @Override
     public boolean apply(InputFile f) {
-      return key.equals(((DeprecatedDefaultInputFile) f).key());
+      return key.equals(((DefaultInputFile) f).key());
     }
   }
 
@@ -56,7 +56,7 @@ class AdditionalFilePredicates {
 
     @Override
     public boolean apply(InputFile f) {
-      return key.equals(((DeprecatedDefaultInputFile) f).deprecatedKey());
+      return key.equals(((DefaultInputFile) f).deprecatedKey());
     }
   }
 
@@ -69,7 +69,7 @@ class AdditionalFilePredicates {
 
     @Override
     public boolean apply(InputFile f) {
-      return path.equals(((DeprecatedDefaultInputFile) f).pathRelativeToSourceDir());
+      return path.equals(((DefaultInputFile) f).pathRelativeToSourceDir());
     }
   }
 
@@ -82,7 +82,7 @@ class AdditionalFilePredicates {
 
     @Override
     public boolean apply(InputFile f) {
-      return path.equals(((DeprecatedDefaultInputFile) f).sourceDirAbsolutePath());
+      return path.equals(((DefaultInputFile) f).sourceDirAbsolutePath());
     }
   }
 }

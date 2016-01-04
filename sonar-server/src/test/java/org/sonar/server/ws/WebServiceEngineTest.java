@@ -19,7 +19,10 @@
  */
 package org.sonar.server.ws;
 
+<<<<<<< HEAD
 import com.google.common.collect.Maps;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -31,10 +34,13 @@ import org.sonar.api.server.ws.Request;
 import org.sonar.api.server.ws.RequestHandler;
 import org.sonar.api.server.ws.Response;
 import org.sonar.api.server.ws.WebService;
+<<<<<<< HEAD
 import org.sonar.api.server.ws.internal.ValidatingRequest;
 import org.sonar.server.exceptions.BadRequestException;
 import org.sonar.server.exceptions.Errors;
 import org.sonar.server.exceptions.Message;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.server.plugins.MimeTypes;
 import org.sonar.server.user.MockUserSession;
 import org.sonar.server.user.UserSession;
@@ -42,7 +48,11 @@ import org.sonar.server.user.UserSession;
 import javax.annotation.Nullable;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.Locale;
+=======
+import java.util.HashMap;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import java.util.Map;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -317,6 +327,7 @@ public class WebServiceEngineTest {
             throw new IllegalStateException("Unexpected");
           }
         });
+<<<<<<< HEAD
       newController.createAction("fail_with_i18n_message")
         .setHandler(new RequestHandler() {
           @Override
@@ -344,6 +355,28 @@ public class WebServiceEngineTest {
             Errors errors = new Errors();
             for (int count = 0; count < Integer.valueOf(request.param("count")); count++) {
               errors.add(Message.of("bad.request.reason", count));
+=======
+      newController.createAction("alive")
+      .setHandler(new RequestHandler() {
+        @Override
+        public void handle(Request request, Response response) {
+          response.noContent();
+        }
+      });
+
+      // parameter "message" is required but not "author"
+      newController.createAction("print")
+        .createParam("message", "required message")
+        .createParam("author", "optional author")
+        .setHandler(new RequestHandler() {
+          @Override
+          public void handle(Request request, Response response) {
+            try {
+              IOUtils.write(
+              request.mandatoryParam("message") + " by " + request.param("author", "-"), response.stream().output());
+            } catch (IOException e) {
+              throw new IllegalStateException(e);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
             }
             throw new BadRequestException(errors);
           }

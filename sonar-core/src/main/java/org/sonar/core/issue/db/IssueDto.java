@@ -27,6 +27,10 @@ import org.sonar.api.issue.internal.DefaultIssue;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.KeyValueFormat;
+<<<<<<< HEAD
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;

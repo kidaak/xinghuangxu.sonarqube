@@ -43,6 +43,7 @@ public class ListingWs implements WebService {
 
   @Override
   public void define(final Context context) {
+<<<<<<< HEAD
     NewController controller = context
       .createController("api/webservices")
       .setSince("4.2")
@@ -90,6 +91,16 @@ public class ListingWs implements WebService {
             throw new IllegalArgumentException("Action does not exist: " + actionKey);
           }
           handleResponseExample(action, response);
+=======
+    NewController controller = context.createController("api/webservices")
+      .setDescription("List web services")
+      .setSince("4.2");
+    controller.createAction("list")
+      .setHandler(new RequestHandler() {
+        @Override
+        public void handle(Request request, Response response) {
+          list(context.controllers(), response);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
         }
       });
     action.createParam("controller")
@@ -157,6 +168,7 @@ public class ListingWs implements WebService {
     }
   }
 
+<<<<<<< HEAD
   private void writeAction(JsonWriter writer, Action action, boolean includeInternals) {
     if (includeInternals || !action.isInternal()) {
       writer.beginObject();
@@ -176,6 +188,20 @@ public class ListingWs implements WebService {
         writer.name("params").beginArray();
         for (Param param : ordering.sortedCopy(action.params())) {
           writeParam(writer, param);
+=======
+  private void write(JsonWriter writer, Action action) {
+    writer.beginObject();
+    writer.prop("key", action.key());
+    writer.prop("description", action.description());
+    writer.prop("since", action.since());
+    writer.prop("internal", action.isInternal());
+    writer.prop("post", action.isPost());
+    if (!action.params().isEmpty()) {
+      // sort parameters by key
+      Ordering<Param> ordering = Ordering.natural().onResultOf(new Function<Param, String>() {
+        public String apply(Param param) {
+          return param.key();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
         }
         writer.endArray();
       }

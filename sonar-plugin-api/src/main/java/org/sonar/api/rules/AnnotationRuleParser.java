@@ -39,9 +39,11 @@ import java.util.List;
 
 /**
  * @since 2.3
+<<<<<<< HEAD:sonar-deprecated/src/main/java/org/sonar/api/rules/AnnotationRuleParser.java
  * @deprecated in 4.2. Replaced by {@link org.sonar.api.server.rule.RulesDefinitionAnnotationLoader}
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2:sonar-plugin-api/src/main/java/org/sonar/api/rules/AnnotationRuleParser.java
  */
-@Deprecated
 public final class AnnotationRuleParser implements ServerComponent {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationRuleParser.class);

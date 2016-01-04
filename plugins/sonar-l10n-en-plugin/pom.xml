@@ -25,7 +25,11 @@
   <parent>
     <groupId>org.codehaus.sonar</groupId>
     <artifactId>sonar</artifactId>
+<<<<<<< HEAD
     <version>4.4.1-SNAPSHOT</version>
+=======
+    <version>4.2.1-SNAPSHOT</version>
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     <relativePath>../..</relativePath>
   </parent>
 

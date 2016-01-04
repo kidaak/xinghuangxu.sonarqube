@@ -53,7 +53,11 @@ public class RuleTagFormatTest {
       RuleTagFormat.validate("  ");
       fail();
     } catch (IllegalArgumentException e) {
+<<<<<<< HEAD
       assertThat(e).hasMessage("Tag '  ' is invalid. Rule tags accept only the characters: a-z, 0-9, '+', '-', '#', '.'");
+=======
+      assertThat(e).hasMessage("Tag '  ' is invalid. Rule tags accept only the following characters: a-z, 0-9, '+', '-', '#', '.'");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     }
   }
 }

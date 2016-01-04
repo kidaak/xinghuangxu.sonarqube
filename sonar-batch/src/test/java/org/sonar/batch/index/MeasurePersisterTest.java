@@ -58,6 +58,7 @@ public class MeasurePersisterTest extends AbstractDaoTestCase {
 
   MeasurePersister measurePersister;
   RuleFinder ruleFinder = mock(RuleFinder.class);
+<<<<<<< HEAD
   Project project = new Project("foo");
   Directory aDirectory = new Directory("org/foo");
   File aFile = new File("org/foo/Bar.java");
@@ -65,6 +66,15 @@ public class MeasurePersisterTest extends AbstractDaoTestCase {
   Snapshot packageSnapshot = snapshot(PACKAGE_SNAPSHOT_ID);
   SnapshotCache snapshotCache;
   MeasureCache measureCache;
+=======
+  ResourcePersister resourcePersister = mock(ResourcePersister.class);
+  MemoryOptimizer memoryOptimizer = mock(MemoryOptimizer.class);
+  Project project = new Project("foo");
+  JavaPackage aPackage = new JavaPackage("org.foo");
+  JavaFile aFile = new JavaFile("org.foo.Bar");
+  Snapshot projectSnapshot = snapshot(PROJECT_SNAPSHOT_ID);
+  Snapshot packageSnapshot = snapshot(PACKAGE_SNAPSHOT_ID);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
   @Before
   public void mockResourcePersister() {
@@ -98,8 +108,13 @@ public class MeasurePersisterTest extends AbstractDaoTestCase {
     Measure measure = new Measure(ncloc()).setValue(1234.0).setAlertText(TOO_LONG_FOR_VARCHAR_4000);
     when(measureCache.entries()).thenReturn(Arrays.asList(new Cache.Entry<Measure>(new String[] {"foo", "ncloc"}, measure)));
 
+<<<<<<< HEAD
     thrown.expect(IllegalStateException.class);
     thrown.expectMessage("Unable to save some measures");
+=======
+    thrown.expect(SonarException.class);
+    thrown.expectMessage("Unable to save measure for metric [ncloc] on component [foo]");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
     measurePersister.persist();
   }
@@ -150,7 +165,19 @@ public class MeasurePersisterTest extends AbstractDaoTestCase {
     Measure measure = new Measure("ncloc").setPersistenceMode(PersistenceMode.MEMORY);
     when(measureCache.entries()).thenReturn(Arrays.asList(new Cache.Entry<Measure>(new String[] {"foo:org/foo/Bar.java", "ncloc"}, measure)));
 
+<<<<<<< HEAD
     measurePersister.persist();
+=======
+    thrown.expect(SonarException.class);
+    thrown.expectMessage("Unable to save measure for metric [ncloc] on component [foo]");
+
+    measurePersister.dump();
+  }
+
+  @Test
+  public void should_not_delay_saving_with_database_only_measure() {
+    setupData("empty");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
     assertEmptyTables("project_measures");
   }

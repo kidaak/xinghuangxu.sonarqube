@@ -43,6 +43,7 @@ import java.util.Set;
 /**
  * Defines a web service. Note that contrary to the deprecated {@link org.sonar.api.web.Webservice}
  * the ws is fully implemented in Java and does not require any Ruby on Rails code.
+<<<<<<< HEAD
  * <p/>
  * <p/>
  * The classes implementing this extension point must be declared in {@link org.sonar.api.SonarPlugin#getExtensions()}.
@@ -51,6 +52,16 @@ import java.util.Set;
  * <pre>
  * public class HelloWs implements WebService {
  *   {@literal @}Override
+=======
+ *
+ * <p/>
+ * The classes implementing this extension point must be declared in {@link org.sonar.api.SonarPlugin#getExtensions()}.
+ *
+ * <h2>How to use</h2>
+ * <pre>
+ * public class HelloWs implements WebService {
+ *   @Override
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  *   public void define(Context context) {
  *     NewController controller = context.createController("api/hello");
  *     controller.setDescription("Web service example");
@@ -59,7 +70,11 @@ import java.util.Set;
  *     controller.createAction("show")
  *       .setDescription("Entry point")
  *       .setHandler(new RequestHandler() {
+<<<<<<< HEAD
  *         {@literal @}Override
+=======
+ *         @Override
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  *         public void handle(Request request, Response response) {
  *           // read request parameters and generates response output
  *           response.newJsonWriter()
@@ -67,21 +82,36 @@ import java.util.Set;
  *             .close();
  *         }
  *      })
+<<<<<<< HEAD
  *      .createParam("key").setDescription("Example key").setRequired(true);
+=======
+ *      .createParam("key", "Example key");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  *
  *    // important to apply changes
  *    controller.done();
  *   }
  * }
  * </pre>
+<<<<<<< HEAD
  * <h3>How to test</h3>
+=======
+ * <h2>How to unit test</h2>
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * <pre>
  * public class HelloWsTest {
  *   WebService ws = new HelloWs();
  *
+<<<<<<< HEAD
  *   {@literal @}Test
  *   public void should_define_ws() throws Exception {
  *     // WsTester is available in the Maven artifact org.codehaus.sonar:sonar-testing-harness
+=======
+ *   @Test
+ *   public void should_define_ws() throws Exception {
+ *     // WsTester is available in the Maven artifact org.codehaus.sonar:sonar-plugin-api
+ *     // with type "test-jar"
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  *     WsTester tester = new WsTester(ws);
  *     WebService.Controller controller = tester.controller("api/hello");
  *     assertThat(controller).isNotNull();
@@ -110,8 +140,11 @@ public interface WebService extends ServerExtension {
      * Structure of request URL is <code>http://&lt;server&gt;/&lt>controller path&gt;/&lt;action path&gt;?&lt;parameters&gt;</code>.
      *
      * @param path the controller path must not start or end with "/". It is recommended to start with "api/"
+<<<<<<< HEAD
      *             and to use lower-case format with underscores, for example "api/coding_rules". Usual actions
      *             are "search", "list", "show", "create" and "delete"
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
      */
     public NewController createController(String path) {
       return new NewController(this, path);
@@ -162,7 +195,11 @@ public interface WebService extends ServerExtension {
     }
 
     /**
+<<<<<<< HEAD
      * Optional description (accept HTML)
+=======
+     * Optional plain-text description
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
      */
     public NewController setDescription(@Nullable String s) {
       this.description = s;
@@ -286,6 +323,7 @@ public interface WebService extends ServerExtension {
       return this;
     }
 
+<<<<<<< HEAD
     /**
      * Link to the document containing an example of response. Content must be UTF-8 encoded.
      * <p/>
@@ -301,6 +339,8 @@ public interface WebService extends ServerExtension {
       return this;
     }
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     public NewParam createParam(String paramKey) {
       if (newParams.containsKey(paramKey)) {
         throw new IllegalStateException(
@@ -312,10 +352,13 @@ public interface WebService extends ServerExtension {
       return newParam;
     }
 
+<<<<<<< HEAD
     /**
      * @deprecated since 4.4. Use {@link #createParam(String paramKey)} instead.
      */
     @Deprecated
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     public NewAction createParam(String paramKey, @Nullable String description) {
       createParam(paramKey).setDescription(description);
       return this;
@@ -337,7 +380,10 @@ public interface WebService extends ServerExtension {
       this.since = StringUtils.defaultIfBlank(newAction.since, controller.since);
       this.post = newAction.post;
       this.isInternal = newAction.isInternal;
+<<<<<<< HEAD
       this.responseExample = newAction.responseExample;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
       if (newAction.handler == null) {
         throw new IllegalArgumentException("RequestHandler is not set on action " + path);

@@ -1,6 +1,10 @@
 /*
  * SonarQube, open source software quality management tool.
+<<<<<<< HEAD
  * Copyright (C) 2008-2014 SonarSource
+=======
+ * Copyright (C) 2008-2013 SonarSource
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -19,6 +23,10 @@
  */
 package org.sonar.api.batch.fs.internal;
 
+<<<<<<< HEAD
+=======
+import com.google.common.base.Charsets;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -59,8 +67,13 @@ public class DefaultFileSystemTest {
     assertThat(fs.isDefaultJvmEncoding()).isTrue();
     assertThat(fs.encoding()).isEqualTo(Charset.defaultCharset());
 
+<<<<<<< HEAD
     fs.setEncoding(Charset.forName("ISO-8859-1"));
     assertThat(fs.encoding()).isEqualTo(Charset.forName("ISO-8859-1"));
+=======
+    fs.setEncoding(Charsets.ISO_8859_1);
+    assertThat(fs.encoding()).isEqualTo(Charsets.ISO_8859_1);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(fs.isDefaultJvmEncoding()).isFalse();
   }
 

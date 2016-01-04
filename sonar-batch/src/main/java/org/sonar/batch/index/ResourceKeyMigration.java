@@ -80,7 +80,11 @@ public class ResourceKeyMigration implements BatchComponent {
     Map<String, InputFile> deprecatedTestKeyMapper = new HashMap<String, InputFile>();
     Map<String, String> deprecatedDirectoryKeyMapper = new HashMap<String, String>();
     for (InputFile inputFile : inputFiles) {
+<<<<<<< HEAD
       String deprecatedKey = ((DeprecatedDefaultInputFile) inputFile).deprecatedKey();
+=======
+      String deprecatedKey = ((DefaultInputFile) inputFile).deprecatedKey();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       if (deprecatedKey != null) {
         if (InputFile.Type.TEST == inputFile.type() && !deprecatedTestKeyMapper.containsKey(deprecatedKey)) {
           deprecatedTestKeyMapper.put(deprecatedKey, inputFile);
@@ -114,9 +118,14 @@ public class ResourceKeyMigration implements BatchComponent {
         // Now compute migration of the parent dir
         String oldKey = StringUtils.substringAfterLast(oldEffectiveKey, ":");
         Resource sonarFile;
+<<<<<<< HEAD
         String parentOldKey;
         if ("java".equals(resourceModel.getLanguageKey())) {
           parentOldKey = String.format("%s:%s", module.getEffectiveKey(), DeprecatedKeyUtils.getJavaFileParentDeprecatedKey(oldKey));
+=======
+        if ("java".equals(resourceModel.getLanguageKey())) {
+          sonarFile = new JavaFile(oldKey);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
         } else {
           sonarFile = new File(oldKey);
           parentOldKey = String.format("%s:%s", module.getEffectiveKey(), sonarFile.getParent().getDeprecatedKey());

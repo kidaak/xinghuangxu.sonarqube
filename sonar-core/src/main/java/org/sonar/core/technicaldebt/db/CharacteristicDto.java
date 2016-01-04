@@ -21,6 +21,11 @@
 package org.sonar.core.technicaldebt.db;
 
 import org.sonar.api.technicaldebt.batch.internal.DefaultCharacteristic;
+<<<<<<< HEAD
+=======
+import org.sonar.api.technicaldebt.batch.internal.DefaultRequirement;
+import org.sonar.api.utils.internal.WorkDuration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;

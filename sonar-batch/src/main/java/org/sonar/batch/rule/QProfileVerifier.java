@@ -1,6 +1,6 @@
 /*
  * SonarQube, open source software quality management tool.
- * Copyright (C) 2008-2014 SonarSource
+ * Copyright (C) 2008-2013 SonarSource
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -27,6 +27,7 @@ import org.sonar.api.BatchComponent;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.utils.MessageException;
+import org.sonar.batch.rule.ModuleQProfiles.QProfile;
 
 public class QProfileVerifier implements BatchComponent {
 
@@ -55,8 +56,8 @@ public class QProfileVerifier implements BatchComponent {
       if (profile == null) {
         logger.warn("No Quality profile found for language " + lang);
       } else {
-        logger.info("Quality profile for {}: {}", lang, profile.getName());
-        if (StringUtils.isNotBlank(defaultName) && defaultName.equals(profile.getName())) {
+        logger.info("Quality profile for {}: {}", lang, profile.name());
+        if (StringUtils.isNotBlank(defaultName) && defaultName.equals(profile.name())) {
           defaultNameUsed = true;
         }
       }

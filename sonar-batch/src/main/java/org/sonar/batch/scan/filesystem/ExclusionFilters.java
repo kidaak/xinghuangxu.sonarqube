@@ -61,8 +61,13 @@ public class ExclusionFilters implements BatchComponent {
   }
 
   public boolean accept(InputFile inputFile, InputFile.Type type) {
+<<<<<<< HEAD
     PathPattern[] inclusionPatterns;
     PathPattern[] exclusionPatterns;
+=======
+    PathPattern[] inclusionPatterns = null;
+    PathPattern[] exclusionPatterns = null;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     if (InputFile.Type.MAIN == type) {
       inclusionPatterns = mainInclusions;
       exclusionPatterns = mainExclusions;
@@ -72,7 +77,10 @@ public class ExclusionFilters implements BatchComponent {
     } else {
       throw new IllegalArgumentException("Unknown file type: " + type);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     if (inclusionPatterns.length > 0) {
       boolean matchInclusion = false;
       for (PathPattern pattern : inclusionPatterns) {

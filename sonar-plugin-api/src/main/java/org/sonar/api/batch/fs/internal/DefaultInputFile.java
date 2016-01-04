@@ -19,6 +19,10 @@
  */
 package org.sonar.api.batch.fs.internal;
 
+<<<<<<< HEAD
+=======
+import org.apache.commons.io.FilenameUtils;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.PathUtils;
 
@@ -156,12 +160,101 @@ public class DefaultInputFile implements InputFile, Serializable {
     return this;
   }
 
+<<<<<<< HEAD
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
     if (!(o instanceof DefaultInputFile)) {
+      return false;
+    }
+
+    DefaultInputFile that = (DefaultInputFile) o;
+    return relativePath.equals(that.relativePath);
+  }
+
+  @Override
+  public int hashCode() {
+    return relativePath.hashCode();
+  }
+
+=======
+  /**
+   * Key used before version 4.2. It can be different than {@link #key} on Java files.
+   */
+  public String deprecatedKey() {
+    return deprecatedKey;
+  }
+
+  public DefaultInputFile setDeprecatedKey(String s) {
+    this.deprecatedKey = s;
+    return this;
+  }
+
+  /**
+   * Used only for backward-compatibility. Meaningless since version 4.2.
+   */
+  public String sourceDirAbsolutePath() {
+    return sourceDirAbsolutePath;
+  }
+
+  public DefaultInputFile setSourceDirAbsolutePath(String s) {
+    this.sourceDirAbsolutePath = FilenameUtils.normalize(s, true);
+    return this;
+  }
+
+  /**
+   * Used only for backward-compatibility. Meaningless since version 4.2.
+   */
+
+  public String pathRelativeToSourceDir() {
+    return pathRelativeToSourceDir;
+  }
+
+  public DefaultInputFile setPathRelativeToSourceDir(String s) {
+    this.pathRelativeToSourceDir = FilenameUtils.normalize(s, true);
+    return this;
+  }
+
+  /**
+   * @deprecated in 4.2. Replaced by {@link org.sonar.api.batch.fs.FileSystem#baseDir()}
+   */
+  @Deprecated
+  @Override
+  public File getFileBaseDir() {
+    return new File(basedir);
+  }
+
+  public void setBasedir(File basedir) {
+    this.basedir = PathUtils.sanitize(basedir.getAbsolutePath());
+  }
+
+  /**
+   * @deprecated in 4.2. Use {@link #file()}
+   */
+  @Deprecated
+  @Override
+  public File getFile() {
+    return file();
+  }
+
+  /**
+   * @deprecated in 4.2. Use {@link #relativePath()}
+   */
+  @Deprecated
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
+  @Override
+  public String toString() {
+    return "[relative=" + relativePath + ", abs=" + absolutePath + "]";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
 

@@ -310,6 +310,34 @@ class Api::IssuesController < Api::ApiController
     end
   end
 
+<<<<<<< HEAD
+=======
+  def component_to_hash(component)
+    hash = {
+      :key => component.key,
+      :id => component.id,
+      :qualifier => component.qualifier
+    }
+    hash[:name] = component.name if component.name
+    hash[:longName] = component.longName if component.longName
+    hash[:path] = component.path if component.path
+    # On a root project, subProjectId is null but projectId is equal to itself, which make no sense.
+    hash[:projectId] = component.projectId if component.subProjectId && component.projectId
+    hash[:subProjectId] = component.subProjectId if component.subProjectId
+    hash
+  end
+
+  def paging_to_hash(paging)
+    {
+      :pageIndex => paging.pageIndex,
+      :pageSize => paging.pageSize,
+      :total => paging.total,
+      :fTotal => ActionController::Base.helpers.number_with_precision(paging.total, :precision => 0),
+      :pages => paging.pages
+    }
+  end
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   def result_to_hash(result)
     hash = {}
     if result.errors and !result.errors.empty?

@@ -20,6 +20,7 @@
 package org.sonar.server.db.migrations;
 
 import com.google.common.collect.ImmutableList;
+<<<<<<< HEAD
 import org.sonar.server.db.migrations.v36.ViolationMigration;
 import org.sonar.server.db.migrations.v42.CompleteIssueMessageMigration;
 import org.sonar.server.db.migrations.v42.PackageKeysMigration;
@@ -35,12 +36,18 @@ import org.sonar.server.db.migrations.v44.FeedQProfileDatesMigration;
 import org.sonar.server.db.migrations.v44.FeedQProfileKeysMigration;
 import org.sonar.server.db.migrations.v44.IssueActionPlanKeyMigration;
 import org.sonar.server.db.migrations.v44.MeasureDataMigration;
+=======
+import org.sonar.server.db.migrations.issueMessage42.IssueWithoutMessageMigration;
+import org.sonar.server.db.migrations.packageKeys42.PackageKeysMigration;
+import org.sonar.server.db.migrations.violation.ViolationMigration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import java.util.List;
 
 public interface DatabaseMigrations {
 
   List<Class<? extends DatabaseMigration>> CLASSES = ImmutableList.of(
+<<<<<<< HEAD
     // 3.6
     ViolationMigration.class,
 
@@ -62,6 +69,10 @@ public interface DatabaseMigrations {
     FeedQProfileDatesMigration.class,
     ChangeLogMigration.class,
     ConvertProfileMeasuresMigration.class
+=======
+    ViolationMigration.class,
+    PackageKeysMigration.class, IssueWithoutMessageMigration.class
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   );
 
 }

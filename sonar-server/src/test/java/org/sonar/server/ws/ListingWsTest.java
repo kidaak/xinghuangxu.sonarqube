@@ -49,6 +49,7 @@ public class ListingWsTest {
     assertThat(index.since()).isEqualTo("4.2");
     assertThat(index.isPost()).isFalse();
     assertThat(index.isInternal()).isFalse();
+<<<<<<< HEAD
 
     assertThat(controller.action("response_example")).isNotNull();
   }
@@ -57,6 +58,8 @@ public class ListingWsTest {
   public void list() throws Exception {
     WsTester tester = new WsTester(ws, new MetricWebService());
     tester.newGetRequest("api/webservices", "list").execute().assertJson(getClass(), "list.json");
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   @Test
@@ -99,12 +102,17 @@ public class ListingWsTest {
         .setDescription("Create metric")
         .setSince("4.1")
         .setPost(true)
+<<<<<<< HEAD
         .setResponseExample(Resources.getResource(getClass(), "ListingWsTest/metrics_example.json"))
+=======
+        .setInternal(true)
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
         .setHandler(new RequestHandler() {
           @Override
           public void handle(Request request, Response response) {
           }
         });
+<<<<<<< HEAD
       create
         .createParam("severity")
         .setDescription("Severity")
@@ -121,6 +129,10 @@ public class ListingWsTest {
         }
       });
 
+=======
+      create.createParam("key").setDescription("Key of new metric");
+      create.createParam("name");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       newController.done();
     }
   }

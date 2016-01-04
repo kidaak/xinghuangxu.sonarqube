@@ -51,6 +51,14 @@ public class MockSourceFile implements SourceFile {
     return this;
   }
 
+<<<<<<< HEAD
+=======
+  public MockSourceFile setModuleKey(String moduleKey) {
+    this.moduleKey = moduleKey;
+    return this;
+  }
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   public String qualifier() {
     return qualifier;
   }

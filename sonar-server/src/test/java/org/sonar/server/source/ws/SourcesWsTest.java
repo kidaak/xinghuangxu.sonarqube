@@ -43,6 +43,7 @@ public class SourcesWsTest {
 
     WebService.Action show = controller.action("show");
     assertThat(show).isNotNull();
+<<<<<<< HEAD
     assertThat(show.handler()).isSameAs(showAction);
     assertThat(show.since()).isEqualTo("4.4");
     assertThat(show.isInternal()).isFalse();
@@ -56,5 +57,12 @@ public class SourcesWsTest {
     assertThat(scm.isInternal()).isFalse();
     assertThat(scm.responseExampleAsString()).isNotEmpty();
     assertThat(scm.params()).hasSize(4);
+=======
+    assertThat(show.handler()).isNotNull();
+    assertThat(show.since()).isEqualTo("4.2");
+    assertThat(show.isPost()).isFalse();
+    assertThat(show.isInternal()).isTrue();
+    assertThat(show.handler()).isSameAs(showHandler);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 }

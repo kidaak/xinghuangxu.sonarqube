@@ -84,9 +84,14 @@ public class WebServiceEngine implements ServerComponent, Startable {
 
     } catch (IllegalArgumentException e) {
       // TODO replace by BadRequestException in Request#mandatoryParam()
+<<<<<<< HEAD
       sendErrors(response, 400, new Errors().add(Message.of(e.getMessage())));
     } catch (BadRequestException e) {
       sendErrors(response, 400, e.errors());
+=======
+      sendError(400, e.getMessage(), response);
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     } catch (ServerException e) {
       sendErrors(response, e.httpCode(), new Errors().add(Message.of(e.getMessage())));
     } catch (Exception e) {

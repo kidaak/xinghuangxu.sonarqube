@@ -1,6 +1,10 @@
 /*
  * SonarQube, open source software quality management tool.
+<<<<<<< HEAD
  * Copyright (C) 2008-2014 SonarSource
+=======
+ * Copyright (C) 2008-2013 SonarSource
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -20,6 +24,7 @@
 
 package org.sonar.server.db.migrations;
 
+<<<<<<< HEAD
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.dbutils.DbUtils;
 import org.slf4j.Logger;
@@ -36,6 +41,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+=======
+import org.apache.commons.dbutils.DbUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.MessageException;
+import org.sonar.core.persistence.Database;
+import org.sonar.core.persistence.dialect.MySql;
+
+import java.sql.*;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 /**
  * Update a table by iterating a sub-set of rows. For each row a SQL UPDATE request
@@ -44,6 +59,7 @@ import java.util.List;
 public class MassUpdater {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MassUpdater.class);
+<<<<<<< HEAD
   private static final int DEFAULT_GROUP_SIZE = 250;
   private final Database db;
   private final int groupSize;
@@ -55,18 +71,30 @@ public class MassUpdater {
   public MassUpdater(Database db, int groupSize) {
     this.db = db;
     this.groupSize = groupSize;
+=======
+  private static final String FAILURE_MESSAGE = "Fail to migrate data";
+  private static final int GROUP_SIZE = 1000;
+  private final Database db;
+
+  public MassUpdater(Database db) {
+    this.db = db;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   public static interface InputLoader<S> {
     String selectSql();
 
+<<<<<<< HEAD
     @CheckForNull
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     S load(ResultSet rs) throws SQLException;
   }
 
   public static interface InputConverter<S> {
     String updateSql();
 
+<<<<<<< HEAD
     /**
      * Return false if you do not want to update this statement
      */
@@ -199,6 +227,65 @@ public class MassUpdater {
     newSelectSql = newSelectSql.replace("${_true}", db.getDialect().getTrueSqlValue());
     newSelectSql = newSelectSql.replace("${_false}", db.getDialect().getFalseSqlValue());
     return newSelectSql;
+=======
+    void convert(S input, PreparedStatement updateStatement) throws SQLException;
+  }
+
+  public <S> void execute(InputLoader<S> inputLoader, InputConverter<S> converter) {
+    long count = 0;
+    try {
+      Connection readConnection = db.getDataSource().getConnection();
+      Statement stmt = null;
+      ResultSet rs = null;
+      Connection writeConnection = db.getDataSource().getConnection();
+      PreparedStatement writeStatement = null;
+      try {
+        readConnection.setAutoCommit(false);
+        writeConnection.setAutoCommit(false);
+        writeStatement = writeConnection.prepareStatement(converter.updateSql());
+        stmt = readConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+        stmt.setFetchSize(GROUP_SIZE);
+        if (db.getDialect().getId().equals(MySql.ID)) {
+          stmt.setFetchSize(Integer.MIN_VALUE);
+        } else {
+          stmt.setFetchSize(GROUP_SIZE);
+        }
+        rs = stmt.executeQuery(inputLoader.selectSql());
+
+        int cursor = 0;
+        while (rs.next()) {
+          converter.convert(inputLoader.load(rs), writeStatement);
+          writeStatement.addBatch();
+
+          cursor++;
+          count++;
+          if (cursor == GROUP_SIZE) {
+            writeStatement.executeBatch();
+            writeConnection.commit();
+            cursor = 0;
+          }
+        }
+        if (cursor > 0) {
+          writeStatement.executeBatch();
+          writeConnection.commit();
+        }
+      } finally {
+        DbUtils.closeQuietly(writeStatement);
+        DbUtils.closeQuietly(writeConnection);
+        DbUtils.closeQuietly(readConnection, stmt, rs);
+
+        LOGGER.info("{} rows have been updated", count);
+      }
+    } catch (SQLException e) {
+      LOGGER.error(FAILURE_MESSAGE, e);
+      SqlUtil.log(LOGGER, e);
+      throw MessageException.of(FAILURE_MESSAGE);
+
+    } catch (Exception e) {
+      LOGGER.error(FAILURE_MESSAGE, e);
+      throw MessageException.of(FAILURE_MESSAGE);
+    }
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
 }

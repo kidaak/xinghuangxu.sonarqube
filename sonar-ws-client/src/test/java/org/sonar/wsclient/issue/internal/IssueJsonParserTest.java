@@ -42,7 +42,11 @@ public class IssueJsonParserTest {
     Issue first = list.get(0);
     assertThat(first.key()).isEqualTo("ABCDE");
     assertThat(first.componentKey()).isEqualTo("Action.java");
+<<<<<<< HEAD
     assertThat(first.componentId()).isEqualTo(5L);
+=======
+    assertThat(first.componentId()).isEqualTo(10L);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(first.projectKey()).isEqualTo("struts");
     assertThat(first.ruleKey()).isEqualTo("squid:CycleBetweenPackages");
     assertThat(first.severity()).isEqualTo("CRITICAL");
@@ -166,7 +170,10 @@ public class IssueJsonParserTest {
     assertThat(component.subProjectId()).isEqualTo(2L);
     assertThat(component.projectId()).isEqualTo(1L);
 
+<<<<<<< HEAD
     assertThat(issues.componentByKey("struts:Action.java").key()).isEqualTo("struts:Action.java");
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     assertThat(issues.componentById(10).key()).isEqualTo("struts:Action.java");
   }
 

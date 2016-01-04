@@ -1353,7 +1353,11 @@ public final class CoreMetrics {
 
   public static final String WEIGHTED_VIOLATIONS_KEY = "weighted_violations";
 
+<<<<<<< HEAD
   public static final Metric<Integer> WEIGHTED_VIOLATIONS = new Metric.Builder(WEIGHTED_VIOLATIONS_KEY, "Weighted issues", Metric.ValueType.INT)
+=======
+  public static final Metric WEIGHTED_VIOLATIONS = new Metric.Builder(WEIGHTED_VIOLATIONS_KEY, "Weighted issues", Metric.ValueType.INT)
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     .setDescription("Weighted Issues")
     .setDirection(Metric.DIRECTION_WORST)
     .setQualitative(true)

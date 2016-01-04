@@ -1,6 +1,10 @@
 /*
  * SonarQube, open source software quality management tool.
+<<<<<<< HEAD
  * Copyright (C) 2008-2014 SonarSource
+=======
+ * Copyright (C) 2008-2013 SonarSource
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -19,6 +23,10 @@
  */
 package org.sonar.api.batch.fs.internal;
 
+<<<<<<< HEAD
+=======
+import org.apache.commons.io.FilenameUtils;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Rule;
@@ -70,9 +78,15 @@ public class DefaultFilePredicatesTest {
 
   @Test
   public void matches_inclusion_patterns() throws Exception {
+<<<<<<< HEAD
     assertThat(predicates.matchesPathPatterns(new String[] {"src/other/**.java", "src/main/**/Action.java"}).apply(javaFile)).isTrue();
     assertThat(predicates.matchesPathPatterns(new String[] {}).apply(javaFile)).isTrue();
     assertThat(predicates.matchesPathPatterns(new String[] {"src/other/**.java", "src/**/*.php"}).apply(javaFile)).isFalse();
+=======
+    assertThat(predicates.matchesPathPatterns(new String[]{"src/other/**.java", "src/main/**/Action.java"}).apply(javaFile)).isTrue();
+    assertThat(predicates.matchesPathPatterns(new String[]{}).apply(javaFile)).isTrue();
+    assertThat(predicates.matchesPathPatterns(new String[]{"src/other/**.java", "src/**/*.php"}).apply(javaFile)).isFalse();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   @Test
@@ -84,9 +98,15 @@ public class DefaultFilePredicatesTest {
 
   @Test
   public void does_not_match_exclusion_patterns() throws Exception {
+<<<<<<< HEAD
     assertThat(predicates.doesNotMatchPathPatterns(new String[] {}).apply(javaFile)).isTrue();
     assertThat(predicates.doesNotMatchPathPatterns(new String[] {"src/other/**.java", "src/**/*.php"}).apply(javaFile)).isTrue();
     assertThat(predicates.doesNotMatchPathPatterns(new String[] {"src/other/**.java", "src/main/**/Action.java"}).apply(javaFile)).isFalse();
+=======
+    assertThat(predicates.doesNotMatchPathPatterns(new String[]{}).apply(javaFile)).isTrue();
+    assertThat(predicates.doesNotMatchPathPatterns(new String[]{"src/other/**.java", "src/**/*.php"}).apply(javaFile)).isTrue();
+    assertThat(predicates.doesNotMatchPathPatterns(new String[]{"src/other/**.java", "src/main/**/Action.java"}).apply(javaFile)).isFalse();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   @Test
@@ -106,7 +126,11 @@ public class DefaultFilePredicatesTest {
   public void has_absolute_path() throws Exception {
     String path = javaFile.file().getAbsolutePath();
     assertThat(predicates.hasAbsolutePath(path).apply(javaFile)).isTrue();
+<<<<<<< HEAD
     assertThat(predicates.hasAbsolutePath(path.replaceAll("/", "\\\\")).apply(javaFile)).isTrue();
+=======
+    assertThat(predicates.hasAbsolutePath(FilenameUtils.separatorsToWindows(path)).apply(javaFile)).isTrue();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
     assertThat(predicates.hasAbsolutePath(temp.newFile().getAbsolutePath()).apply(javaFile)).isFalse();
     assertThat(predicates.hasAbsolutePath("src/main/java/struts/Action.java").apply(javaFile)).isFalse();
@@ -129,6 +153,10 @@ public class DefaultFilePredicatesTest {
     // relative file
     assertThat(predicates.is(new File(javaFile.relativePath())).apply(javaFile)).isTrue();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     // absolute file
     assertThat(predicates.is(javaFile.file()).apply(javaFile)).isTrue();
     assertThat(predicates.is(javaFile.file().getAbsoluteFile()).apply(javaFile)).isTrue();
@@ -185,8 +213,13 @@ public class DefaultFilePredicatesTest {
     assertThat(predicates.and(Arrays.asList(predicates.all(), predicates.none())).apply(javaFile)).isFalse();
 
     // array
+<<<<<<< HEAD
     assertThat(predicates.and(new FilePredicate[] {predicates.all(), predicates.all()}).apply(javaFile)).isTrue();
     assertThat(predicates.and(new FilePredicate[] {predicates.all(), predicates.none()}).apply(javaFile)).isFalse();
+=======
+    assertThat(predicates.and(new FilePredicate[]{predicates.all(), predicates.all()}).apply(javaFile)).isTrue();
+    assertThat(predicates.and(new FilePredicate[]{predicates.all(), predicates.none()}).apply(javaFile)).isFalse();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   @Test
@@ -208,8 +241,14 @@ public class DefaultFilePredicatesTest {
     assertThat(predicates.or(Arrays.asList(predicates.none(), predicates.none())).apply(javaFile)).isFalse();
 
     // array
+<<<<<<< HEAD
     assertThat(predicates.or(new FilePredicate[] {predicates.all(), predicates.all()}).apply(javaFile)).isTrue();
     assertThat(predicates.or(new FilePredicate[] {predicates.all(), predicates.none()}).apply(javaFile)).isTrue();
     assertThat(predicates.or(new FilePredicate[] {predicates.none(), predicates.none()}).apply(javaFile)).isFalse();
+=======
+    assertThat(predicates.or(new FilePredicate[]{predicates.all(), predicates.all()}).apply(javaFile)).isTrue();
+    assertThat(predicates.or(new FilePredicate[]{predicates.all(), predicates.none()}).apply(javaFile)).isTrue();
+    assertThat(predicates.or(new FilePredicate[]{predicates.none(), predicates.none()}).apply(javaFile)).isFalse();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 }

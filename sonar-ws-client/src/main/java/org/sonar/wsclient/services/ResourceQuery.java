@@ -274,7 +274,10 @@ public class ResourceQuery extends Query<Resource> {
     appendRuleField(url, "rule_priorities", excludeRuleSeverities, ruleSeverities);
     appendUrlParameter(url, "includetrends", includeTrends);
     appendUrlParameter(url, "characteristics", characteristicKeys);
+<<<<<<< HEAD
     appendUrlParameter(url, "includealerts", includeAlerts);
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     appendUrlParameter(url, "verbose", verbose);
     return url.toString();
   }

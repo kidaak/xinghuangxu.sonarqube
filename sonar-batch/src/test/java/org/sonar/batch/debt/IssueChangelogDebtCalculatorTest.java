@@ -26,7 +26,12 @@ import org.junit.Test;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.issue.internal.DefaultIssue;
 import org.sonar.api.issue.internal.FieldDiffs;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+import org.sonar.api.utils.internal.WorkDurationFactory;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import java.util.Date;
 

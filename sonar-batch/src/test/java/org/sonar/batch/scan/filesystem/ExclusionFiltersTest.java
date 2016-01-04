@@ -41,10 +41,27 @@ public class ExclusionFiltersTest {
   public void no_inclusions_nor_exclusions() throws IOException {
     ExclusionFilters filter = new ExclusionFilters(new FileExclusions(new Settings()));
     filter.prepare();
+<<<<<<< HEAD
+=======
 
     java.io.File file = temp.newFile();
     DefaultInputFile inputFile = new DefaultInputFile("src/main/java/com/mycompany/FooDao.java").setFile(file);
     assertThat(filter.accept(inputFile, InputFile.Type.MAIN)).isTrue();
+    assertThat(filter.accept(inputFile, InputFile.Type.TEST)).isTrue();
+  }
+
+  @Test
+  public void match_inclusion() throws IOException {
+    Settings settings = new Settings();
+    settings.setProperty(CoreProperties.PROJECT_INCLUSIONS_PROPERTY, "**/*Dao.java");
+    ExclusionFilters filter = new ExclusionFilters(new FileExclusions(settings));
+    filter.prepare();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
+
+    java.io.File file = temp.newFile();
+    DefaultInputFile inputFile = new DefaultInputFile("src/main/java/com/mycompany/FooDao.java").setFile(file);
+    assertThat(filter.accept(inputFile, InputFile.Type.MAIN)).isTrue();
+<<<<<<< HEAD
     assertThat(filter.accept(inputFile, InputFile.Type.TEST)).isTrue();
   }
 
@@ -62,6 +79,13 @@ public class ExclusionFiltersTest {
     inputFile = new DefaultInputFile("src/main/java/com/mycompany/Foo.java").setFile(file);
     assertThat(filter.accept(inputFile, InputFile.Type.MAIN)).isFalse();
   }
+=======
+
+    inputFile = new DefaultInputFile("src/main/java/com/mycompany/Foo.java").setFile(file);
+    assertThat(filter.accept(inputFile, InputFile.Type.MAIN)).isFalse();
+  }
+
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
   @Test
   public void match_at_least_one_inclusion() throws IOException {

@@ -30,12 +30,19 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DeprecatedDefaultInputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.File;
+<<<<<<< HEAD
+=======
+import org.sonar.api.resources.JavaFile;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.resources.Languages;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.SonarException;
 import org.sonar.batch.index.ResourceKeyMigration;
+<<<<<<< HEAD
 import org.sonar.batch.util.DeprecatedKeyUtils;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 /**
  * Index all files/directories of the module in SQ database and importing source code.
@@ -49,13 +56,24 @@ public class ComponentIndexer implements BatchComponent {
   private final SonarIndex sonarIndex;
   private final ResourceKeyMigration migration;
   private final Project module;
+<<<<<<< HEAD
 
   public ComponentIndexer(Project module, Languages languages, SonarIndex sonarIndex, Settings settings, ResourceKeyMigration migration) {
+=======
+  private InputFileCache fileCache;
+
+  public ComponentIndexer(Project module, Languages languages, SonarIndex sonarIndex, Settings settings, ResourceKeyMigration migration,
+                          InputFileCache fileCache) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     this.module = module;
     this.languages = languages;
     this.sonarIndex = sonarIndex;
     this.settings = settings;
     this.migration = migration;
+<<<<<<< HEAD
+=======
+    this.fileCache = fileCache;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   public void execute(FileSystem fs) {
@@ -71,12 +89,23 @@ public class ComponentIndexer implements BatchComponent {
       }
       Resource sonarFile = File.create(inputFile.relativePath(), pathFromSourceDir, languages.get(languageKey), unitTest);
       if ("java".equals(languageKey)) {
+<<<<<<< HEAD
         sonarFile.setDeprecatedKey(DeprecatedKeyUtils.getJavaFileDeprecatedKey(pathFromSourceDir));
       } else {
         sonarFile.setDeprecatedKey(pathFromSourceDir);
       }
       sonarIndex.index(sonarFile);
       importSources(fs, shouldImportSource, inputFile, sonarFile);
+=======
+        sonarFile.setDeprecatedKey(JavaFile.fromRelativePath(pathFromSourceDir, false).getDeprecatedKey());
+      } else {
+        sonarFile.setDeprecatedKey(pathFromSourceDir);
+      }
+      if (sonarFile != null) {
+        sonarIndex.index(sonarFile);
+        importSources(fs, shouldImportSource, inputFile, sonarFile);
+      }
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     }
   }
 

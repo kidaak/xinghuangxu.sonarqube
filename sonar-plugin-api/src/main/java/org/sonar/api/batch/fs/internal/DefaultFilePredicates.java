@@ -1,6 +1,10 @@
 /*
  * SonarQube, open source software quality management tool.
+<<<<<<< HEAD
  * Copyright (C) 2008-2014 SonarSource
+=======
+ * Copyright (C) 2008-2013 SonarSource
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -19,12 +23,19 @@
  */
 package org.sonar.api.batch.fs.internal;
 
+<<<<<<< HEAD
+=======
+import com.google.common.collect.Lists;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -115,6 +126,7 @@ public class DefaultFilePredicates implements FilePredicates {
   }
 
   public FilePredicate hasLanguages(Collection<String> languages) {
+<<<<<<< HEAD
     List<FilePredicate> list = new ArrayList<FilePredicate>();
     for (String language : languages) {
       list.add(hasLanguage(language));
@@ -124,6 +136,9 @@ public class DefaultFilePredicates implements FilePredicates {
 
   public FilePredicate hasLanguages(String... languages) {
     List<FilePredicate> list = new ArrayList<FilePredicate>();
+=======
+    List<FilePredicate> list = Lists.newArrayList();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
     for (String language : languages) {
       list.add(hasLanguage(language));
     }

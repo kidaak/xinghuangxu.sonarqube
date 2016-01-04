@@ -31,16 +31,25 @@ import org.sonar.api.resources.Languages;
 import org.sonar.api.resources.Project;
 import org.sonar.api.scan.filesystem.PathResolver;
 import org.sonar.api.utils.SonarException;
+<<<<<<< HEAD
+=======
+import org.sonar.api.utils.internal.WorkDurationFactory;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.batch.DefaultFileLinesContextFactory;
 import org.sonar.batch.DefaultResourceCreationLock;
 import org.sonar.batch.ProjectConfigurator;
 import org.sonar.batch.ProjectTree;
+<<<<<<< HEAD
 import org.sonar.batch.bootstrap.ExtensionInstaller;
 import org.sonar.batch.bootstrap.ExtensionMatcher;
 import org.sonar.batch.bootstrap.ExtensionUtils;
 import org.sonar.batch.bootstrap.MetricProvider;
+=======
+import org.sonar.batch.bootstrap.*;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.batch.components.PeriodsDefinition;
 import org.sonar.batch.debt.IssueChangelogDebtCalculator;
+<<<<<<< HEAD
 import org.sonar.batch.index.Caches;
 import org.sonar.batch.index.ComponentDataCache;
 import org.sonar.batch.index.ComponentDataPersister;
@@ -63,6 +72,14 @@ import org.sonar.batch.issue.ScanIssueStorage;
 import org.sonar.batch.languages.DeprecatedLanguagesReferential;
 import org.sonar.batch.phases.GraphPersister;
 import org.sonar.batch.profiling.PhasesSumUpTimeProfiler;
+=======
+import org.sonar.batch.debt.RuleDebtCalculator;
+import org.sonar.batch.index.*;
+import org.sonar.batch.issue.*;
+import org.sonar.batch.phases.GraphPersister;
+import org.sonar.batch.profiling.PhasesSumUpTimeProfiler;
+import org.sonar.batch.qualitygate.ProjectAlerts;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.batch.scan.filesystem.InputFileCache;
 import org.sonar.batch.scan.maven.FakeMavenPluginExecutor;
 import org.sonar.batch.scan.maven.MavenPluginExecutor;
@@ -186,7 +203,12 @@ public class ProjectScanContainer extends ComponentContainer {
       // Measures
       MeasureCache.class,
 
+<<<<<<< HEAD
       ProjectSettingsReady.class);
+=======
+      // quality gates
+      ProjectAlerts.class);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   }
 
   private void fixMavenExecutor() {

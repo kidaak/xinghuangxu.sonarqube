@@ -32,7 +32,11 @@ public class ResourceQueryTest extends QueryTestCase {
     assertThat(query.getResourceKeyOrId()).isEqualTo(("org.foo:bar"));
     assertThat(query.isVerbose()).isEqualTo((false));
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   @Test
   public void measures() {
     ResourceQuery query = new ResourceQuery();

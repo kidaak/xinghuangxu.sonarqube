@@ -26,7 +26,10 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
 import org.sonar.api.CoreProperties;
+<<<<<<< HEAD
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DeprecatedDefaultInputFile;
 import org.sonar.api.config.Settings;

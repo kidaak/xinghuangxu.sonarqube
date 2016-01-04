@@ -1,6 +1,10 @@
 /*
  * SonarQube, open source software quality management tool.
+<<<<<<< HEAD
  * Copyright (C) 2008-2014 SonarSource
+=======
+ * Copyright (C) 2008-2013 SonarSource
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -27,15 +31,22 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Java;
 import org.sonar.api.resources.Languages;
 import org.sonar.api.utils.MessageException;
+<<<<<<< HEAD
 import org.sonar.batch.languages.DeprecatedLanguagesReferential;
 import org.sonar.batch.languages.LanguagesReferential;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class LanguageVerifierTest {
 
   Settings settings = new Settings();
+<<<<<<< HEAD
   LanguagesReferential languages = new DeprecatedLanguagesReferential(new Languages(Java.INSTANCE));
+=======
+  Languages languages = new Languages(Java.INSTANCE);
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   DefaultFileSystem fs = new DefaultFileSystem();
 
   @Rule

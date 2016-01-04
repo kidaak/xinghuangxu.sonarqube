@@ -56,7 +56,10 @@ public class WebServiceTest {
         .setSince("4.1")
         .setPost(true)
         .setInternal(true)
+<<<<<<< HEAD
         .setResponseExample(getClass().getResource("/org/sonar/api/server/ws/WebServiceTest/response-example.txt"))
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
         .setHandler(new RequestHandler() {
           @Override
           public void handle(Request request, Response response) {
@@ -193,6 +196,7 @@ public class WebServiceTest {
 
   @Test
   public void fail_if_no_controller_path() {
+<<<<<<< HEAD
     try {
       new WebService() {
         @Override
@@ -208,6 +212,29 @@ public class WebServiceTest {
 
   @Test
   public void controller_path_must_not_start_with_slash() {
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
+    try {
+      new WebService() {
+        @Override
+        public void define(Context context) {
+<<<<<<< HEAD
+          context.createController("/hello").done();
+=======
+          context.createController(null).done();
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
+        }
+      }.define(context);
+      fail();
+    } catch (IllegalArgumentException e) {
+<<<<<<< HEAD
+=======
+      assertThat(e).hasMessage("WS controller path must not be empty");
+    }
+  }
+
+  @Test
+  public void controller_path_must_not_start_with_slash() {
     try {
       new WebService() {
         @Override
@@ -217,6 +244,7 @@ public class WebServiceTest {
       }.define(context);
       fail();
     } catch (IllegalArgumentException e) {
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
       assertThat(e).hasMessage("WS controller path must not start or end with slash: /hello");
     }
   }
@@ -258,7 +286,11 @@ public class WebServiceTest {
         NewController newController = context.createController("api/rule");
         NewAction create = newController.createAction("create").setHandler(mock(RequestHandler.class));
         create.createParam("key").setDescription("Key of the new rule");
+<<<<<<< HEAD
         create.createParam("severity").setDefaultValue("MAJOR").setPossibleValues("INFO", "MAJOR", "BLOCKER");
+=======
+        create.createParam("severity");
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
         newController.done();
       }
     }.define(context);
@@ -346,6 +378,7 @@ public class WebServiceTest {
       assertThat(e).hasMessage("The parameter 'key' is defined multiple times in the action 'create'");
     }
   }
+<<<<<<< HEAD
 
   @Test
   public void ws_is_internal_if_all_actions_are_internal() {
@@ -401,4 +434,6 @@ public class WebServiceTest {
       assertThat(e).hasMessage("Fail to load file:/does/not/exist");
     }
   }
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 }

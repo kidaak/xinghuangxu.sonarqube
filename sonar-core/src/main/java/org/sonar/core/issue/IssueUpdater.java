@@ -29,7 +29,11 @@ import org.sonar.api.issue.internal.DefaultIssue;
 import org.sonar.api.issue.internal.DefaultIssueComment;
 import org.sonar.api.issue.internal.IssueChangeContext;
 import org.sonar.api.user.User;
+<<<<<<< HEAD
 import org.sonar.api.utils.Duration;
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 
 import javax.annotation.Nullable;
 

@@ -40,6 +40,11 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.KeyValueFormat;
+<<<<<<< HEAD
+=======
+import org.sonar.api.utils.internal.WorkDuration;
+import org.sonar.api.utils.internal.WorkDurationFactory;
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import org.sonar.batch.issue.IssueCache;
 import org.sonar.batch.scan.LastSnapshots;
 import org.sonar.core.issue.IssueUpdater;

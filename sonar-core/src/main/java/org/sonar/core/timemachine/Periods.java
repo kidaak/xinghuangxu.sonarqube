@@ -27,7 +27,10 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.database.model.Snapshot;
 import org.sonar.api.i18n.I18n;
 
+<<<<<<< HEAD
 import javax.annotation.CheckForNull;
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
 import javax.annotation.Nullable;
 
 import java.text.ParseException;
@@ -84,7 +87,10 @@ public class Periods implements BatchExtension, ServerComponent {
     return label(mode, param, convertDate(date), true);
   }
 
+<<<<<<< HEAD
   @CheckForNull
+=======
+>>>>>>> refs/remotes/xinghuangxu/remotes/origin/branch-4.2
   private String label(String mode, @Nullable String param, @Nullable String date, boolean shortLabel) {
     String label;
     if (CoreProperties.TIMEMACHINE_MODE_DAYS.equals(mode)) {

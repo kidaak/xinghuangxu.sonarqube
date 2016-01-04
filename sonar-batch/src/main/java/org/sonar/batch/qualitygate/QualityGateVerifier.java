@@ -1,6 +1,6 @@
 /*
  * SonarQube, open source software quality management tool.
- * Copyright (C) 2008-2014 SonarSource
+ * Copyright (C) 2008-2013 SonarSource
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
@@ -19,61 +19,45 @@
  */
 package org.sonar.batch.qualitygate;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang.StringUtils;
-import org.sonar.api.batch.Decorator;
-import org.sonar.api.batch.DecoratorBarriers;
-import org.sonar.api.batch.DecoratorContext;
-import org.sonar.api.batch.DependedUpon;
-import org.sonar.api.batch.DependsUpon;
+import org.sonar.api.batch.*;
 import org.sonar.api.database.model.Snapshot;
 import org.sonar.api.i18n.I18n;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
+import org.sonar.api.profiles.Alert;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.resources.ResourceUtils;
-import org.sonar.api.utils.Duration;
-import org.sonar.api.utils.Durations;
-import org.sonar.core.qualitygate.db.QualityGateConditionDto;
 import org.sonar.core.timemachine.Periods;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 public class QualityGateVerifier implements Decorator {
 
   private static final String VARIATION_METRIC_PREFIX = "new_";
   private static final String VARIATION = "variation";
-  private static final Map<String, String> OPERATOR_LABELS = ImmutableMap.of(
-    QualityGateConditionDto.OPERATOR_EQUALS, "=",
-    QualityGateConditionDto.OPERATOR_NOT_EQUALS, "!=",
-    QualityGateConditionDto.OPERATOR_GREATER_THAN, ">",
-    QualityGateConditionDto.OPERATOR_LESS_THAN, "<");
 
-  private QualityGate qualityGate;
+  private final Snapshot snapshot;
+  private final Periods periods;
+  private final I18n i18n;
+  private ProjectAlerts projectAlerts;
 
-  private Snapshot snapshot;
-  private Periods periods;
-  private I18n i18n;
-  private Durations durations;
-
-  public QualityGateVerifier(QualityGate qualityGate, Snapshot snapshot, Periods periods, I18n i18n, Durations durations) {
-    this.qualityGate = qualityGate;
+  public QualityGateVerifier(Snapshot snapshot, ProjectAlerts projectAlerts, Periods periods, I18n i18n) {
     this.snapshot = snapshot;
+    this.projectAlerts = projectAlerts;
     this.periods = periods;
     this.i18n = i18n;
-    this.durations = durations;
   }
 
   @DependedUpon
-  public Metric generatesQualityGateStatus() {
+  public Metric generatesAlertStatus() {
     return CoreMetrics.ALERT_STATUS;
   }
 
@@ -85,36 +69,33 @@ public class QualityGateVerifier implements Decorator {
   @DependsUpon
   public Collection<Metric> dependsUponMetrics() {
     Set<Metric> metrics = Sets.newHashSet();
-    for (ResolvedCondition condition : qualityGate.conditions()) {
-      metrics.add(condition.metric());
+    for (Alert alert : projectAlerts.all()) {
+      metrics.add(alert.getMetric());
     }
     return metrics;
   }
 
-  @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return qualityGate.isEnabled();
+    return true;
   }
 
-  @Override
-  public void decorate(Resource resource, DecoratorContext context) {
-    if (ResourceUtils.isRootProject(resource)) {
-      checkProjectConditions(resource, context);
+  public void decorate(final Resource resource, final DecoratorContext context) {
+    if (ResourceUtils.isRootProject(resource) && !projectAlerts.all().isEmpty()) {
+      checkProjectAlerts(context);
     }
   }
 
-  private void checkProjectConditions(Resource resource, DecoratorContext context) {
+  private void checkProjectAlerts(DecoratorContext context) {
     Metric.Level globalLevel = Metric.Level.OK;
-    QualityGateDetails details = new QualityGateDetails();
     List<String> labels = Lists.newArrayList();
 
-    for (ResolvedCondition condition : qualityGate.conditions()) {
-      Measure measure = context.getMeasure(condition.metric());
+    for (Alert alert : projectAlerts.all()) {
+      Measure measure = context.getMeasure(alert.getMetric());
       if (measure != null) {
-        Metric.Level level = ConditionUtils.getLevel(condition, measure);
+        Metric.Level level = AlertUtils.getLevel(alert, measure);
 
         measure.setAlertStatus(level);
-        String text = getText(condition, level);
+        String text = getText(alert, level);
         if (!StringUtils.isBlank(text)) {
           measure.setAlertText(text);
           labels.add(text);
@@ -128,8 +109,6 @@ public class QualityGateVerifier implements Decorator {
         } else if (Metric.Level.ERROR == level) {
           globalLevel = Metric.Level.ERROR;
         }
-
-        details.addCondition(condition, level, ConditionUtils.getValue(condition, measure));
       }
     }
 
@@ -137,58 +116,36 @@ public class QualityGateVerifier implements Decorator {
     globalMeasure.setAlertStatus(globalLevel);
     globalMeasure.setAlertText(StringUtils.join(labels, ", "));
     context.saveMeasure(globalMeasure);
-
-    details.setLevel(globalLevel);
-    Measure detailsMeasure = new Measure(CoreMetrics.QUALITY_GATE_DETAILS, details.toJson());
-    context.saveMeasure(detailsMeasure);
-
   }
 
-  private String getText(ResolvedCondition condition, Metric.Level level) {
+  private String getText(Alert alert, Metric.Level level) {
     if (level == Metric.Level.OK) {
       return null;
     }
-    return getAlertLabel(condition, level);
+    return getAlertLabel(alert, level);
   }
 
-  private String getAlertLabel(ResolvedCondition condition, Metric.Level level) {
-    Integer alertPeriod = condition.period();
-    String metric = i18n.message(Locale.ENGLISH, "metric." + condition.metricKey() + ".name", condition.metric().getName());
+  private String getAlertLabel(Alert alert, Metric.Level level) {
+    Integer alertPeriod = alert.getPeriod();
+    String metric = i18n.message(Locale.ENGLISH, "metric." + alert.getMetric().getKey() + ".name", alert.getMetric().getName());
 
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(metric);
 
-    if (alertPeriod != null && !condition.metricKey().startsWith(VARIATION_METRIC_PREFIX)) {
+    if (alertPeriod != null && !alert.getMetric().getKey().startsWith(VARIATION_METRIC_PREFIX)) {
       String variation = i18n.message(Locale.ENGLISH, VARIATION, VARIATION).toLowerCase();
       stringBuilder.append(" ").append(variation);
     }
 
     stringBuilder
-      .append(" ").append(operatorLabel(condition.operator())).append(" ")
-      .append(alertValue(condition, level));
+      .append(" ").append(alert.getOperator()).append(" ")
+      .append(level.equals(Metric.Level.ERROR) ? alert.getValueError() : alert.getValueWarning());
 
     if (alertPeriod != null) {
       stringBuilder.append(" ").append(periods.label(snapshot, alertPeriod));
     }
 
     return stringBuilder.toString();
-  }
-
-  private String alertValue(ResolvedCondition condition, Metric.Level level) {
-    String value = level.equals(Metric.Level.ERROR) ? condition.errorThreshold() : condition.warningThreshold();
-    if (condition.metric().getType().equals(Metric.ValueType.WORK_DUR)) {
-      return formatDuration(value);
-    } else {
-      return value;
-    }
-  }
-
-  private String formatDuration(String value) {
-    return durations.format(Locale.ENGLISH, Duration.create(Long.parseLong(value)), Durations.DurationFormat.SHORT);
-  }
-
-  private String operatorLabel(String operator) {
-    return OPERATOR_LABELS.get(operator);
   }
 
   @Override
